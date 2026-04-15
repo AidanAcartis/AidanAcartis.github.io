@@ -1,0 +1,45 @@
+@startuml backbone_model
+
+skinparam defaultFontName Arial
+skinparam backgroundColor #FAFAFA
+skinparam shadowing false
+skinparam ArrowColor #555555
+skinparam ArrowThickness 1.5
+
+skinparam rectangle {
+  BorderColor #888888
+  BorderThickness 1
+  FontSize 13
+}
+
+title Backbone Model — SentenceTransformer (MiniLM-L6-v2)
+
+package "Backbone: SentenceTransformer (fine-tuned MiniLM-L6-v2)" #EEF0FF {
+
+  rectangle "Raw Text Input" as INPUT #DDDDDD
+  rectangle "WordPiece Tokenizer\nmax_seq_length=256 · vocab=30k" as TOKENIZER #DDDDDD
+  rectangle "Token Embeddings\nToken + Position + Segment → 384-d" as EMBED #C8C4F0
+
+  package "BERT Encoder (6 Transformer Layers)" #D8D4F8 {
+    rectangle "Transformer Block 1" as B1 #C8C4F0
+    rectangle "Transformer Block 2" as B2 #C8C4F0
+    rectangle "Transformer Blocks 3–5" as B35 #C8C4F0
+    rectangle "Transformer Block 6" as B6 #C8C4F0
+  }
+
+  rectangle "Mean Pooling\nAggregate token embeddings" as POOL #A8DCC8
+  rectangle "L2 Normalization\nCosine similarity space" as NORM #A8DCC8
+  rectangle "Final Embedding (384-d vector)" as OUT #F5C870
+
+  INPUT --> TOKENIZER
+  TOKENIZER --> EMBED
+  EMBED --> B1
+  B1 --> B2
+  B2 --> B35
+  B35 --> B6
+  B6 --> POOL
+  POOL --> NORM
+  NORM --> OUT
+}
+
+@enduml

@@ -6,15 +6,15 @@ const allProjects = [
   {
     id: 1,
     title: 'taskMonitor',
-    theme: 'AI · System Monitoring',
+    theme: 'Semantic Activity Analysis with AI',
     category: 'featured',
     filters: ['ml', 'software'],
-    demo: '🖥️',
+    demo: 'assets/gifs/video.webm',
     short: 'Desktop app that tracks open windows and bash commands, then uses AI to cluster tasks by intent and summarize user activity.',
     details: 'Built with Python and PyQt6, taskMonitor hooks into wmctrl and X11 to capture window open/close events in real time, and reads .bash_history for command tracking. A processing pipeline normalizes raw logs, uses a custom model (FileDescGen) to generate human-readable descriptions of window events, and cmddesc to describe shell commands. A second model (Semantic-Task-Clustering) groups tasks sharing the same intent, and a third model (Global_Task_Description) synthesizes an overall intention across all clusters. All events are timestamped and visualized through graphs and statistics in the PyQt6 interface.',
-    techs: ['Python', 'PyQt6', 'Bash', 'wmctrl', 'X11', 'NLP'],
-    hours: 200,
-    link: 'https://github.com/AidanAcartis'
+    techs: ['Python', 'Bash', 'PyTorch', 'Transformers (T5/Flan-T5)', 'Fine-tuned NLP Models', 'SentenceTransformers', 'scikit-learn', 'Pandas', 'NumPy', 'PyQt6', 'pyqtgraph', 'SQLite', 'Docker', 'Linux (X11, wmctrl)'],
+    hours: 6930,
+    link: 'https://github.com/AidanAcartis/taskMonitor'
   },
   {
     id: 4,
@@ -22,35 +22,82 @@ const allProjects = [
     theme: 'CLI Tool · Systems',
     category: 'featured',
     filters: ['software'],
-    demo: '⌨️',
+    demo: 'assets/gifs/cmddesc.webm',
     short: 'Packaged Python CLI that parses and describes any shell command — flags, arguments, pipes, subcommands — in plain language.',
     details: 'A modular Python package installable via pip (editable dev mode or wheel distribution) that tokenizes shell input using safe_shlex_split, detects argument types (files, IPs, ports, URLs, scripts, JSON…), matches tokens against a JSON-based command database, and produces human-readable descriptions of each component. Handles complex inputs: combined flags (-xvz → -x -v -z), piped commands, sudo, scripts, and multi-operator strings (&&, ||, ;). The architecture is clean and separated: constants, tokenizer, type detector, pattern expander, matcher, and describer. Used internally in taskMonitor to annotate bash history entries.',
     techs: ['Python', 'pip', 'PyInstaller', 'Bash', 'JSON'],
-    hours: 100,
-    link: 'https://github.com/AidanAcartis'
+    hours: 80,
+    link: 'https://github.com/AidanAcartis/Command-Describer'
   },
+  // ── 2. AI & Data Projects ────────────────────────────────────────────────
   {
     id: 14,
-    title: 'Semantic Task System',
-    theme: 'NLP · Clustering · AI',
-    category: 'featured',
+    title: 'Semantic Task Clustering',
+    theme: 'NLP · Contrastive Learning',
+    category: 'ai',
     filters: ['ml', 'software'],
-    demo: '🧠',
-    short: 'Three custom NLP models working in pipeline: FileDescGen describes window events, Semantic-Task-Clustering groups tasks by intent, Global_Task_Description synthesizes overall activity.',
-    details: 'A three-model pipeline designed for intent-based task monitoring. FileDescGen generates human-readable descriptions of raw window open/close events (e.g. "user opened a Python editor"). Semantic-Task-Clustering uses embedding similarity to group events that share the same underlying intent into coherent task clusters. Global_Task_Description synthesizes a high-level summary across all clusters, producing a natural-language description of the user\'s overall session goal. All three models are integrated into taskMonitor but were designed as standalone, reusable components.',
-    techs: ['Python', 'NLP', 'Transformers', 'Semantic Similarity', 'Clustering'],
-    hours: 120,
+    demo: 'assets/images/clustering_model.png',
+    short: 'End-to-end semantic clustering pipeline that groups user activities into coherent, interpretable global tasks using sentence embeddings and hierarchical refinement.',
+    details: 'Semantic Task Clustering is a full training and inference pipeline designed to transform raw user task items into semantically coherent clusters representing high-level global tasks. The system uses SentenceTransformer embeddings (MiniLM-L6-v2) and hierarchical agglomerative clustering, refined through iterative reclustering based on cohesion and silhouette score. The pipeline enforces a task hierarchy (sub-tasks → global task blocks), trains using implicit contrastive learning (MultipleNegativesRankingLoss), and supports singleton tasks as valid independent clusters. The inference stage includes multi-step refinement: global clustering, cohesion-based reclustering, singleton handling, and adaptive cluster splitting. The final output is a stable, interpretable set of task clusters directly usable in a user activity analysis system.',
+    techs: [
+      'Python',
+      'SentenceTransformers',
+      'scikit-learn',
+      'Cosine Similarity',
+      'NLP',
+      'Embeddings'
+    ],
+    hours: 330,
+    link: 'https://github.com/AidanAcartis/Semantic-Task-Clustering'
+  },
+  {
+    id: 15,
+    title: 'File Description Generation Model (FileDescGen)',
+    theme: 'NLP · Text Generation · AI',
+    category: 'ai',
+    filters: ['ml', 'software'],
+    demo: 'assets/images/filedescgen_architecture.png',
+    short: 'Fine-tuned model that generates human-readable descriptions from raw filenames and system logs.',
+    details: 'A sequence-to-text model trained to convert raw filenames, file metadata, and system events into natural language descriptions. Used for interpreting low-level system logs into meaningful semantic representations.',
+    techs: [
+      'Python',
+      'PyTorch',
+      'Transformers (T5)',
+      'Fine-tuning',
+      'PEFT (optional)',
+      'NLP'
+    ],
+    hours: 1792,
+    link: 'https://github.com/AidanAcartis/FileDescGen'
+  },
+  {
+    id: 16,
+    title: 'Global Task Description Inference Model',
+    theme: 'NLP · Intent Detection · AI . Abstraction Learning',
+    category: 'ai',
+    filters: ['ml', 'software'],
+    demo: 'assets/gifs/output.gif',
+    short: 'Model that infers high-level user intent from sequences of task items.',
+    details: 'A fine-tuned Flan-T5 model that takes structured task sequences as input and predicts the global objective behind them. Used for user intent inference and behavioral abstraction.',
+    techs: [
+      'Python',
+      'PyTorch',
+      'Transformers (Flan-T5)',
+      'LoRA (PEFT)',
+      'NLP',
+      'Sequence-to-Sequence'
+    ],
+    hours: 70,
     link: 'https://github.com/AidanAcartis'
   },
 
-  // ── 2. AI & Data Projects ────────────────────────────────────────────────
   {
     id: 2,
     title: 'Text Feature Extraction & Classification',
     theme: 'NLP · Machine Learning',
     category: 'ai',
     filters: ['ml', 'software'],
-    demo: '📝',
+    demo: 'assets/gifs/output.gif',
     short: 'Rigorous NLP benchmark comparing BoW, TF-IDF and N-grams across four classifiers with full hyperparameter tuning.',
     details: 'Explored three feature extraction strategies — Bag-of-Words (unigrams), TF-IDF, and N-grams (N≥2) — each paired with Softmax, Linear SVM, Random Forest, and Gradient Boosting classifiers. The pipeline covers EDA (class imbalance, outlier detection, t-SNE visualization), full text preprocessing (lowercasing, tokenization, stopword removal, lemmatization), and hyperparameter tuning via Grid Search. TF-IDF + Linear SVM achieved the best test score (0.741). Key insight: feature engineering matters more than model choice for classical NLP.',
     techs: ['Python', 'Scikit-learn', 'NLTK', 'Pandas', 'Matplotlib'],
@@ -63,7 +110,7 @@ const allProjects = [
     theme: 'Computer Vision · ML',
     category: 'ai',
     filters: ['ml', 'software'],
-    demo: '🖼️',
+    demo: 'assets/gifs/output.gif',
     short: 'Progressive image classification pipeline: raw pixels → HOG features → VGG16 transfer learning, with classical ML models.',
     details: 'Benchmarked image classification on CIFAR-10 using three increasingly powerful feature representations. Starting from raw pixel values with Logistic Regression and SVM, then applying HOG (Histogram of Oriented Gradients) with PCA dimensionality reduction, and finally extracting deep features from a pre-trained VGG16 model. Each stage was evaluated with multiple classifiers and hyperparameter tuning (Grid Search, Randomized Search). Kernel SVM on VGG16 features achieved the best performance. The notebook demonstrates how the right feature representation can transform a poor baseline into a competitive model without training a deep network from scratch.',
     techs: ['Python', 'TensorFlow', 'Scikit-learn', 'OpenCV', 'PCA', 'VGG16'],
@@ -78,7 +125,7 @@ const allProjects = [
     theme: 'Backtracking · C',
     category: 'systems',
     filters: ['math', 'c', 'software'],
-    demo: '🧩',
+    demo: 'assets/gifs/output.gif',
     short: 'Second personal C project — no AI, no Stack Overflow. Exhaustively generates all valid n×n Sudoku grids using backtracking and combinatorics.',
     details: 'Written without AI assistance or Stack Overflow. Generates all valid Sudoku grids of size n×n (n = k²: 4, 9, 16…) using a combinatorial counter matrix boucle[][] that acts as a multi-digit positional counter for all possible placements. For each permutation, RemplirUpletComplet() applies constraint checks — row validity (ConditionLigne()), block validity (ConditionBloc()), and presence testing (TestPresence()) — then backtracks when no valid placement exists. Outputs Grid0 (cell numbering), uplet placement grids, and final valid Sudoku matrices. For 4×4, all valid configurations are found. Exhaustive for larger sizes.',
     techs: ['C', 'Backtracking', 'Combinatorics', 'Constraint satisfaction'],
@@ -91,7 +138,7 @@ const allProjects = [
     theme: 'Combinatorics · C',
     category: 'systems',
     filters: ['math', 'c', 'software'],
-    demo: '🔳',
+    demo: 'assets/gifs/output.gif',
     short: 'First-ever personal C project — no AI, no Stack Overflow. Generates all Latin squares via cyclic permutations and exhaustive exploration.',
     details: 'Written entirely without AI assistance or Stack Overflow as a first C project. Generates Latin squares of order n from an initial permutation using cyclic shifts: Square[i][j] = t[(i+j) mod n]. The program iterates through all n! permutations of the first row using FonctionPermut(), builds the corresponding Latin square for each, and counts generated permutations. Optimized with n!/2 to reduce iterations. Modular structure: main.c, boucles.c, permutation.c, utils.c with separate headers. Demonstrates mastery of pointers, modular C, and combinatorial thinking from first principles.',
     techs: ['C', 'Combinatorics', 'Permutations', 'Modular arithmetic'],
@@ -104,7 +151,7 @@ const allProjects = [
     theme: 'Numerical Methods · Java',
     category: 'systems',
     filters: ['math', 'java', 'software'],
-    demo: '🔢',
+    demo: 'assets/gifs/output.gif',
     short: 'Exact linear system solver using Gauss-Jordan elimination with fraction arithmetic to eliminate all rounding errors.',
     details: 'Solves any linear system P·X = B by transforming the augmented matrix (P|B) into Reduced Row Echelon Form using exact fraction arithmetic (no floating-point). The Fraction class handles all arithmetic symbolically. The algorithm detects inconsistency (rows of the form [0…0|b] with b≠0), handles free variables, reorders zero rows to the bottom, and reads solutions directly from the final RREF. Structured across five classes: Fraction, FractionApp, MatrixUtils, Solver, and Main. Accepts rational coefficient input in a/b form.',
     techs: ['Java', 'Fraction Arithmetic', 'Linear Algebra', 'RREF'],
@@ -117,7 +164,7 @@ const allProjects = [
     theme: 'Algorithms · Game Logic',
     category: 'systems',
     filters: ['cpp', 'software', 'math'],
-    demo: '🗺️',
+    demo: 'assets/gifs/output.gif',
     short: 'Shortest-path algorithm on a hexagonal grid with obstacle avoidance, comparing arrival times between friendly and enemy troops.',
     details: 'Simulates troop movement on a hex grid toward a target camp, accounting for impassable cells and movement speed. Core functions: fonction1/fonction2 compute the shortest path, forChange/choice handle alternative routes when obstacles block direct movement, Verif/Forbid validate cell passability, and solution compares travel times between friendly and enemy troops (returning True if friendlies arrive first). Supports configurable starting positions, speeds, camp location, and obstacle sets. Two implementations: ModifyFarming.cpp (main) and OutputForModifyFarming.cpp (alternate dataset). Display helpers for debugging grid and path state.',
     techs: ['C++', 'Graph algorithms', 'Pathfinding', 'Hex grid'],
@@ -132,7 +179,7 @@ const allProjects = [
     theme: 'Backend · Distributed DB',
     category: 'apps',
     filters: ['software', 'web'],
-    demo: '📔',
+    demo: 'assets/gifs/output.gif',
     short: 'Full-stack diary application with Apache Cassandra backend, session tracking, and a live dashboard with usage statistics.',
     details: 'Node.js/Express backend connected to Apache Cassandra (v5) storing data across four tables: user_accounts, user_profiles, user_diary, and user_sessions. Implements full CRUD on diary entries (POST/GET/PUT/DELETE) and tracks session metadata — duration, pages visited, CRUD actions — to feed a real-time statistics dashboard. The dashboard displays session count, active users, average session duration, and diary action breakdowns. Cassandra was chosen for its distributed, write-optimized architecture and column-family data model, which maps naturally to append-heavy diary entries and session logs.',
     techs: ['Node.js', 'Apache Cassandra', 'CQL', 'REST API', 'JavaScript'],
@@ -145,7 +192,7 @@ const allProjects = [
     theme: 'Mobile App',
     category: 'apps',
     filters: ['mobile', 'software'],
-    demo: '📱',
+    demo: 'assets/gifs/output.gif',
     short: 'Cross-platform mobile app for product CRUD with auth, image upload, advanced filters, and user profile management.',
     details: 'Built with React Native and Expo, backed by json-server simulating a REST API (/users, /products, /categories). Features: Sign Up / Sign In with AsyncStorage session persistence, paginated product list, full CRUD (add, edit, delete with multi-select), image upload via expo-image-picker with preview, and advanced filtering by category buttons, seller name, maximum price, and text search. User profile page shows personal info and a count of products created. Navigation via expo-router with tab layout. Axios handles all API calls. Product sharing button stubbed for future implementation.',
     techs: ['React Native', 'Expo', 'Axios', 'AsyncStorage', 'json-server', 'expo-router'],
@@ -160,7 +207,7 @@ const allProjects = [
     theme: 'Creative Coding · Canvas',
     category: 'experiments',
     filters: ['javascript', 'software'],
-    demo: '✨',
+    demo: 'assets/gifs/output.gif',
     short: 'Image that explodes into individual pixels like fireworks, then reassembles particle by particle back into the original photo.',
     details: 'A canvas-based particle system that reads every pixel of a source image, stores its color and target position, then launches each pixel outward with randomized velocity and gravity to simulate an explosion. Each particle follows a physics trajectory (velocity decay, gravity pull) before reversing and homing back to its exact pixel coordinate in the original image. The reassembly phase uses easing functions to lock particles smoothly into place, reconstructing the photo. The effect is a full cycle: intact image → pixel explosion → particle flight → pixel reassembly. No libraries — raw Canvas 2D API and requestAnimationFrame.',
     techs: ['JavaScript', 'HTML5 Canvas', 'Particle Physics', 'requestAnimationFrame'],
@@ -173,7 +220,7 @@ const allProjects = [
     theme: 'Web · Data Visualization',
     category: 'experiments',
     filters: ['software', 'web'],
-    demo: '📊',
+    demo: 'assets/gifs/output.gif',
     short: 'Flask interface that executes SQL queries and lets you write Plotly code to instantly visualize the results as interactive charts.',
     details: 'A Flask backend exposes an endpoint that runs arbitrary SQL queries against the database and returns results as JSON. The frontend (HTML/CSS/JS) provides a terminal-style SQL input, a live result preview (toggle show/hide), and a Plotly code editor where you describe the chart (trace, layout: title, axis labels). Clicking \'Draw the graph\' renders the visualization inline with clickable data points. A simulation script (simulation.py) auto-replays 10 preset SQL + Plotly scenarios from plots_sql.json, pausing between each for user confirmation — useful for demos and testing.',
     techs: ['Python', 'Flask', 'SQL', 'Plotly', 'JavaScript', 'HTML/CSS'],
@@ -186,7 +233,7 @@ const allProjects = [
     theme: 'Full Stack · Distributed DB',
     category: 'experiments',
     filters: ['software', 'web'],
-    demo: '📚',
+    demo: 'assets/gifs/output.gif',
     short: 'Library management system with MongoDB replica set, role-based access (admin/user), loan workflow, and rich analytics dashboard.',
     details: 'Full-stack React + Node.js/Express app backed by a 2-node MongoDB replica set (rs0). Users can sign up, browse books, borrow and reserve. Admins (inserted directly into DB with bcrypt-hashed passwords) approve/reject loan requests, confirm returns, send notifications, and access a full analytics dashboard. Dashboard components: BooksStats (category distribution, availability, top authors, monthly additions), LoansStats (loans and late returns per day/week/month/year), and UsersStats (monthly registrations, active vs inactive). All charts use Recharts (LineChart, BarChart, PieChart) with dynamic timeframe switching. Images stored in backend/public/uploads. Writes go to primary, reads optimized from secondaries.',
     techs: ['React', 'Node.js', 'MongoDB', 'Replica Set', 'JWT', 'Recharts'],
@@ -236,39 +283,8 @@ function setupFilters() {
     });
   });
 
-  addClearAllButton();
 }
 
-function addClearAllButton() {
-  const bar = document.getElementById('filterBar');
-
-  const allBtn = document.createElement('button');
-  allBtn.className = 'filter-btn filter-all';
-  allBtn.textContent = 'All';
-  allBtn.addEventListener('click', () => {
-    activeFilters.clear();
-    document.querySelectorAll('#filterBar .filter-btn:not(.filter-all)').forEach(b => {
-      b.classList.remove('active');
-      activeFilters.add(b.dataset.filter);
-      b.classList.add('active');
-    });
-    renderProjects();
-  });
-
-  const noneBtn = document.createElement('button');
-  noneBtn.className = 'filter-btn filter-none';
-  noneBtn.textContent = 'None';
-  noneBtn.addEventListener('click', () => {
-    activeFilters.clear();
-    document.querySelectorAll('#filterBar .filter-btn:not(.filter-all):not(.filter-none)').forEach(b => {
-      b.classList.remove('active');
-    });
-    renderProjects();
-  });
-
-  bar.appendChild(allBtn);
-  bar.appendChild(noneBtn);
-}
 
 // ── Render ─────────────────────────────────────────────────────────────────
 function renderProjects() {
@@ -320,25 +336,45 @@ function buildCard(p) {
     ? '<span class="featured-badge">Featured</span>'
     : '';
 
+  const isVideo = p.demo?.endsWith('.webm');
+
+  const demoHtml = isVideo
+    ? `
+      <video class="demo-gif" autoplay loop muted playsinline>
+        <source src="${p.demo}" type="video/webm">
+      </video>
+      <div class="demo-scanline"></div>
+    `
+    : `
+      <img class="demo-gif" src="${p.demo}" alt="${p.title} demo">
+      <div class="demo-scanline"></div>
+    `;
+
   return `
-    <div class="project-card${p.category === 'featured' ? ' project-card--featured' : ''}" onclick="openModal(${p.id})">
+    <div class="project-card">
       <div class="project-demo">
-        ${featuredBadge}
-        <span class="demo-emoji">${p.demo}</span>
-        <div class="demo-scanline"></div>
+        ${demoHtml}
       </div>
+
       <div class="project-info">
         <div class="project-title">${p.title}</div>
         <div class="project-theme">${p.theme}</div>
         <div class="project-desc">${p.short}</div>
+
         <div class="project-meta">
           <div class="meta-item"><span>⏱</span> ${p.hours}h dev</div>
           <div class="tech-tags">${techsHtml}</div>
         </div>
-      </div>
-      <div class="project-actions">
-        <a href="${p.link}" target="_blank" class="btn-sm btn-outline" onclick="event.stopPropagation()">GitHub ↗</a>
-        <button class="btn-sm btn-primary" onclick="event.stopPropagation(); openModal(${p.id})">Details</button>
+
+        <div class="project-actions">
+          <a href="${p.link}" target="_blank" class="btn-sm btn-outline"
+             onclick="event.stopPropagation()">GitHub ↗</a>
+
+          <button class="btn-sm btn-primary"
+             onclick="event.stopPropagation(); openModal(${p.id})">
+            Details
+          </button>
+        </div>
       </div>
     </div>
   `;
