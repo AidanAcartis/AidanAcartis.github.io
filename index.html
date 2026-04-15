@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio – Your Name</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">&lt;AidanAcartis /&gt;</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#awards">Awards</a></li>
+  </ul>
+</nav>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-inner">
+
+    <div class="about-left">
+      <div class="avatar-wrap">
+        <div class="avatar-initials"></div>
+        <img src="sary.jpeg" alt="RA" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="status-badge">
+        <div class="status-dot"></div>
+        Open to work
+      </div>
+      <div class="about-desc">
+        <P>Master’s student in Computer Science – Mathematics, Computer Science and Applied Statistics</P>
+        <p>(MISA Madagascar)</p>
+      </div>
+      <div class="about-links">
+        <a href="https://github.com/AidanAcartis" target="_blank" class="icon-link">
+          <svg viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a href="https://www.linkedin.com/in/ralaikoto-m-27220a358/" target="_blank" class="icon-link">
+          <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+
+    <div class="about-right">
+      <div class="about-greeting">// Hello, World</div>
+      <h1 class="about-name">RALAIKOTO<br><span>Sitraka</span></h1>
+      <p class="about-title" id="typed-title">Software Engineer<span class="typed-cursor">_</span></p>
+
+      <div class="specialties">
+        <div class="spec-line">&gt; Software Engineering</div>
+        <div class="spec-line">&gt; Machine Learning</div>
+        <div class="spec-line">&gt; Deep Learning</div>
+        <div class="spec-line">&gt; Data Science</div>
+        <div class="spec-line">&gt; Computer Vision</div>
+        <div class="spec-line">&gt; NLP</div>
+        <div class="spec-line">&gt; Cloud & DevOps</div>
+        <div class="spec-line">&gt; Algorithms</div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-title"></div>
+  <h2 class="section-heading">Projects</h2>
+ 
+  <div class="filter-bar" id="filterBar">
+
+  <button class="filter-btn active" data-filter="featured">
+    <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+    Featured
+  </button>
+
+  <button class="filter-btn active" data-filter="ai">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
+    AI &amp; Data
+  </button>
+
+  <button class="filter-btn active" data-filter="systems">
+    <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+    Systems
+  </button>
+
+  <button class="filter-btn active" data-filter="apps">
+    <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="18" r="1"/></svg>
+    Applications
+  </button>
+
+  <button class="filter-btn active" data-filter="experiments">
+    <svg viewBox="0 0 24 24"><path d="M9 3h6v11l3.5 6H5.5L9 14V3z"/><path d="M6 9h12"/></svg>
+    Experiments
+  </button>
+
+</div>
+ 
+  <div class="projects-grid" id="projectsGrid">
+    <!-- Rendered by projects.js -->
+    <div class="empty-state">// Loading projects...</div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-title">// 03. Expertise</div>
+  <h2 class="section-heading">Skills & Certifications</h2>
+
+  <div class="skills-grid">
+    <div class="skill-category">
+      <div class="skill-cat-title">Languages</div>
+      <div class="skill-list">
+        <span class="skill-pill">Python</span>
+        <span class="skill-pill">C</span>
+        <span class="skill-pill">C++</span>
+        <span class="skill-pill">Java</span>
+        <span class="skill-pill">JavaScript</span>
+        <span class="skill-pill">TypeScript</span>
+        <span class="skill-pill">SQL</span>
+        <span class="skill-pill">Bash</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <div class="skill-cat-title">ML / AI</div>
+      <div class="skill-list">
+        <span class="skill-pill">TensorFlow</span>
+        <span class="skill-pill">PyTorch</span>
+        <span class="skill-pill">Scikit-learn</span>
+        <span class="skill-pill">Keras</span>
+        <span class="skill-pill">OpenCV</span>
+        <span class="skill-pill">HuggingFace</span>
+        <span class="skill-pill">NLTK</span>
+        <span class="skill-pill">Pandas</span>
+        <span class="skill-pill">NumPy</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <div class="skill-cat-title">Web / Mobile</div>
+      <div class="skill-list">
+        <span class="skill-pill">React</span>
+        <span class="skill-pill">Node.js</span>
+        <span class="skill-pill">Flask</span>
+        <span class="skill-pill">Django</span>
+        <span class="skill-pill">React Native</span>
+        <span class="skill-pill">REST API</span>
+        <span class="skill-pill">GraphQL</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <div class="skill-cat-title">Tools & Cloud</div>
+      <div class="skill-list">
+        <span class="skill-pill">Git</span>
+        <span class="skill-pill">Docker</span>
+        <span class="skill-pill">Linux</span>
+        <span class="skill-pill">AWS</span>
+        <span class="skill-pill">GCP</span>
+        <span class="skill-pill">PostgreSQL</span>
+        <span class="skill-pill">MongoDB</span>
+        <span class="skill-pill">CI/CD</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CERTIFICATIONS -->
+  <div class="certs-title">// Certifications</div>
+  <div class="certs-grid" id="certsGrid">
+    <a href="#" target="_blank" class="cert-card">
+      <div class="cert-icon">🏅</div>
+      <div class="cert-info">
+        <div class="cert-name">Deep Learning Specialization</div>
+        <div class="cert-issuer">Coursera · DeepLearning.AI</div>
+        <div class="cert-year">2023 — Add your link</div>
+      </div>
+    </a>
+    <a href="#" target="_blank" class="cert-card">
+      <div class="cert-icon">☁️</div>
+      <div class="cert-info">
+        <div class="cert-name">AWS Cloud Practitioner</div>
+        <div class="cert-issuer">Amazon Web Services</div>
+        <div class="cert-year">2023 — Add your link</div>
+      </div>
+    </a>
+    <a href="#" target="_blank" class="cert-card">
+      <div class="cert-icon">🧠</div>
+      <div class="cert-info">
+        <div class="cert-name">Add your certification</div>
+        <div class="cert-issuer">Issuer name</div>
+        <div class="cert-year">Year</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section id="awards">
+  <div class="section-title">// 04. Recognition</div>
+  <h2 class="section-heading">Awards</h2>
+
+  <div class="awards-grid" id="awardsGrid">
+    <div class="award-card">
+      <div class="award-img">
+        🏆
+        <span class="award-rank">1st Place</span>
+      </div>
+      <div class="award-body">
+        <div class="award-title">Hackathon Name</div>
+        <div class="award-org">Organization · Year</div>
+        <div class="award-desc">Add a short description of your award, what you built, and why you won. Replace this with your real achievement.</div>
+      </div>
+    </div>
+    <div class="award-card">
+      <div class="award-img">
+        🥈
+        <span class="award-rank">2nd Place</span>
+      </div>
+      <div class="award-body">
+        <div class="award-title">Competition Name</div>
+        <div class="award-org">Organization · Year</div>
+        <div class="award-desc">Add a short description of your award, what you built or achieved.</div>
+      </div>
+    </div>
+    <div class="award-card">
+      <div class="award-img">
+        🌟
+        <span class="award-rank" style="background:var(--green3)">Honorable</span>
+      </div>
+      <div class="award-body">
+        <div class="award-title">Add your Award</div>
+        <div class="award-org">Organization · Year</div>
+        <div class="award-desc">Description of the award and what made it special.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  Built with <span>♥</span> &amp; <span>&lt;code/&gt;</span> — <span>YourName</span> © 2025
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modal">
+    <button class="modal-close" id="modalClose">✕</button>
+    <div class="modal-title" id="modalTitle"></div>
+    <div class="modal-theme" id="modalTheme"></div>
+    <div class="modal-section">
+      <div class="modal-label">Description</div>
+      <div class="modal-value" id="modalDesc"></div>
+    </div>
+    <div class="modal-section">
+      <div class="modal-label">Tech Stack</div>
+      <div class="modal-value" id="modalTechs"></div>
+    </div>
+    <div class="modal-section">
+      <div class="modal-label">Dev Hours</div>
+      <div class="modal-value" id="modalHours"></div>
+    </div>
+    <div class="modal-section">
+      <div class="modal-label">Link</div>
+      <div class="modal-value"><a id="modalLink" href="#" target="_blank" style="color:var(--green)">View Repository / Demo</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- FAIRY -->
+<div id="fairy">
+  <svg class="fairy-svg" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Body -->
+    <ellipse cx="14" cy="16" rx="4" ry="5" fill="#00ff88" opacity="0.9"/>
+    <!-- Head -->
+    <circle cx="14" cy="9" r="3.5" fill="#00ff88" opacity="0.95"/>
+    <!-- Left wing -->
+    <ellipse cx="8" cy="13" rx="5" ry="2.5" fill="#00ff88" opacity="0.35" transform="rotate(-20 8 13)"/>
+    <!-- Right wing -->
+    <ellipse cx="20" cy="13" rx="5" ry="2.5" fill="#00ff88" opacity="0.35" transform="rotate(20 20 13)"/>
+    <!-- Sparkle -->
+    <circle cx="14" cy="9" r="1.2" fill="white" opacity="0.7"/>
+    <!-- Wand star -->
+    <polygon points="14,21 14.7,23 16.5,23 15.1,24.1 15.7,26 14,25 12.3,26 12.9,24.1 11.5,23 13.3,23" fill="#00ff88" opacity="0.7"/>
+  </svg>
+</div>
+
+<script src="projects.js"></script>
+</body>
+</html>

@@ -1,0 +1,426 @@
+// ===== PROJECTS MODULE =====
+
+const allProjects = [
+
+  // ── 1. Featured Projects ─────────────────────────────────────────────────
+  {
+    id: 1,
+    title: 'taskMonitor',
+    theme: 'AI · System Monitoring',
+    category: 'featured',
+    filters: ['ml', 'software'],
+    demo: '🖥️',
+    short: 'Desktop app that tracks open windows and bash commands, then uses AI to cluster tasks by intent and summarize user activity.',
+    details: 'Built with Python and PyQt6, taskMonitor hooks into wmctrl and X11 to capture window open/close events in real time, and reads .bash_history for command tracking. A processing pipeline normalizes raw logs, uses a custom model (FileDescGen) to generate human-readable descriptions of window events, and cmddesc to describe shell commands. A second model (Semantic-Task-Clustering) groups tasks sharing the same intent, and a third model (Global_Task_Description) synthesizes an overall intention across all clusters. All events are timestamped and visualized through graphs and statistics in the PyQt6 interface.',
+    techs: ['Python', 'PyQt6', 'Bash', 'wmctrl', 'X11', 'NLP'],
+    hours: 200,
+    link: 'https://github.com/AidanAcartis'
+  },
+  {
+    id: 4,
+    title: 'Command Describer (cmddesc)',
+    theme: 'CLI Tool · Systems',
+    category: 'featured',
+    filters: ['software'],
+    demo: '⌨️',
+    short: 'Packaged Python CLI that parses and describes any shell command — flags, arguments, pipes, subcommands — in plain language.',
+    details: 'A modular Python package installable via pip (editable dev mode or wheel distribution) that tokenizes shell input using safe_shlex_split, detects argument types (files, IPs, ports, URLs, scripts, JSON…), matches tokens against a JSON-based command database, and produces human-readable descriptions of each component. Handles complex inputs: combined flags (-xvz → -x -v -z), piped commands, sudo, scripts, and multi-operator strings (&&, ||, ;). The architecture is clean and separated: constants, tokenizer, type detector, pattern expander, matcher, and describer. Used internally in taskMonitor to annotate bash history entries.',
+    techs: ['Python', 'pip', 'PyInstaller', 'Bash', 'JSON'],
+    hours: 100,
+    link: 'https://github.com/AidanAcartis'
+  },
+  {
+    id: 14,
+    title: 'Semantic Task System',
+    theme: 'NLP · Clustering · AI',
+    category: 'featured',
+    filters: ['ml', 'software'],
+    demo: '🧠',
+    short: 'Three custom NLP models working in pipeline: FileDescGen describes window events, Semantic-Task-Clustering groups tasks by intent, Global_Task_Description synthesizes overall activity.',
+    details: 'A three-model pipeline designed for intent-based task monitoring. FileDescGen generates human-readable descriptions of raw window open/close events (e.g. "user opened a Python editor"). Semantic-Task-Clustering uses embedding similarity to group events that share the same underlying intent into coherent task clusters. Global_Task_Description synthesizes a high-level summary across all clusters, producing a natural-language description of the user\'s overall session goal. All three models are integrated into taskMonitor but were designed as standalone, reusable components.',
+    techs: ['Python', 'NLP', 'Transformers', 'Semantic Similarity', 'Clustering'],
+    hours: 120,
+    link: 'https://github.com/AidanAcartis'
+  },
+
+  // ── 2. AI & Data Projects ────────────────────────────────────────────────
+  {
+    id: 2,
+    title: 'Text Feature Extraction & Classification',
+    theme: 'NLP · Machine Learning',
+    category: 'ai',
+    filters: ['ml', 'software'],
+    demo: '📝',
+    short: 'Rigorous NLP benchmark comparing BoW, TF-IDF and N-grams across four classifiers with full hyperparameter tuning.',
+    details: 'Explored three feature extraction strategies — Bag-of-Words (unigrams), TF-IDF, and N-grams (N≥2) — each paired with Softmax, Linear SVM, Random Forest, and Gradient Boosting classifiers. The pipeline covers EDA (class imbalance, outlier detection, t-SNE visualization), full text preprocessing (lowercasing, tokenization, stopword removal, lemmatization), and hyperparameter tuning via Grid Search. TF-IDF + Linear SVM achieved the best test score (0.741). Key insight: feature engineering matters more than model choice for classical NLP.',
+    techs: ['Python', 'Scikit-learn', 'NLTK', 'Pandas', 'Matplotlib'],
+    hours: 80,
+    link: 'https://github.com/AidanAcartis/Text-feature-extraction-classification'
+  },
+  {
+    id: 3,
+    title: 'CIFAR-10 Feature Extraction',
+    theme: 'Computer Vision · ML',
+    category: 'ai',
+    filters: ['ml', 'software'],
+    demo: '🖼️',
+    short: 'Progressive image classification pipeline: raw pixels → HOG features → VGG16 transfer learning, with classical ML models.',
+    details: 'Benchmarked image classification on CIFAR-10 using three increasingly powerful feature representations. Starting from raw pixel values with Logistic Regression and SVM, then applying HOG (Histogram of Oriented Gradients) with PCA dimensionality reduction, and finally extracting deep features from a pre-trained VGG16 model. Each stage was evaluated with multiple classifiers and hyperparameter tuning (Grid Search, Randomized Search). Kernel SVM on VGG16 features achieved the best performance. The notebook demonstrates how the right feature representation can transform a poor baseline into a competitive model without training a deep network from scratch.',
+    techs: ['Python', 'TensorFlow', 'Scikit-learn', 'OpenCV', 'PCA', 'VGG16'],
+    hours: 90,
+    link: 'https://github.com/AidanAcartis'
+  },
+
+  // ── 3. Systems & Algorithms ───────────────────────────────────────────────
+  {
+    id: 7,
+    title: 'All-Valid Sudoku Generator',
+    theme: 'Backtracking · C',
+    category: 'systems',
+    filters: ['math', 'c', 'software'],
+    demo: '🧩',
+    short: 'Second personal C project — no AI, no Stack Overflow. Exhaustively generates all valid n×n Sudoku grids using backtracking and combinatorics.',
+    details: 'Written without AI assistance or Stack Overflow. Generates all valid Sudoku grids of size n×n (n = k²: 4, 9, 16…) using a combinatorial counter matrix boucle[][] that acts as a multi-digit positional counter for all possible placements. For each permutation, RemplirUpletComplet() applies constraint checks — row validity (ConditionLigne()), block validity (ConditionBloc()), and presence testing (TestPresence()) — then backtracks when no valid placement exists. Outputs Grid0 (cell numbering), uplet placement grids, and final valid Sudoku matrices. For 4×4, all valid configurations are found. Exhaustive for larger sizes.',
+    techs: ['C', 'Backtracking', 'Combinatorics', 'Constraint satisfaction'],
+    hours: 60,
+    link: 'https://github.com/AidanAcartis'
+  },
+  {
+    id: 6,
+    title: 'Latin Square Generator',
+    theme: 'Combinatorics · C',
+    category: 'systems',
+    filters: ['math', 'c', 'software'],
+    demo: '🔳',
+    short: 'First-ever personal C project — no AI, no Stack Overflow. Generates all Latin squares via cyclic permutations and exhaustive exploration.',
+    details: 'Written entirely without AI assistance or Stack Overflow as a first C project. Generates Latin squares of order n from an initial permutation using cyclic shifts: Square[i][j] = t[(i+j) mod n]. The program iterates through all n! permutations of the first row using FonctionPermut(), builds the corresponding Latin square for each, and counts generated permutations. Optimized with n!/2 to reduce iterations. Modular structure: main.c, boucles.c, permutation.c, utils.c with separate headers. Demonstrates mastery of pointers, modular C, and combinatorial thinking from first principles.',
+    techs: ['C', 'Combinatorics', 'Permutations', 'Modular arithmetic'],
+    hours: 50,
+    link: 'https://github.com/AidanAcartis'
+  },
+  {
+    id: 5,
+    title: 'Gauss-Jordan Solver',
+    theme: 'Numerical Methods · Java',
+    category: 'systems',
+    filters: ['math', 'java', 'software'],
+    demo: '🔢',
+    short: 'Exact linear system solver using Gauss-Jordan elimination with fraction arithmetic to eliminate all rounding errors.',
+    details: 'Solves any linear system P·X = B by transforming the augmented matrix (P|B) into Reduced Row Echelon Form using exact fraction arithmetic (no floating-point). The Fraction class handles all arithmetic symbolically. The algorithm detects inconsistency (rows of the form [0…0|b] with b≠0), handles free variables, reorders zero rows to the bottom, and reads solutions directly from the final RREF. Structured across five classes: Fraction, FractionApp, MatrixUtils, Solver, and Main. Accepts rational coefficient input in a/b form.',
+    techs: ['Java', 'Fraction Arithmetic', 'Linear Algebra', 'RREF'],
+    hours: 60,
+    link: 'https://github.com/AidanAcartis'
+  },
+  {
+    id: 13,
+    title: 'Hexagonal Pathfinding (C++)',
+    theme: 'Algorithms · Game Logic',
+    category: 'systems',
+    filters: ['cpp', 'software', 'math'],
+    demo: '🗺️',
+    short: 'Shortest-path algorithm on a hexagonal grid with obstacle avoidance, comparing arrival times between friendly and enemy troops.',
+    details: 'Simulates troop movement on a hex grid toward a target camp, accounting for impassable cells and movement speed. Core functions: fonction1/fonction2 compute the shortest path, forChange/choice handle alternative routes when obstacles block direct movement, Verif/Forbid validate cell passability, and solution compares travel times between friendly and enemy troops (returning True if friendlies arrive first). Supports configurable starting positions, speeds, camp location, and obstacle sets. Two implementations: ModifyFarming.cpp (main) and OutputForModifyFarming.cpp (alternate dataset). Display helpers for debugging grid and path state.',
+    techs: ['C++', 'Graph algorithms', 'Pathfinding', 'Hex grid'],
+    hours: 45,
+    link: 'https://github.com/AidanAcartis'
+  },
+
+  // ── 4. Applications ───────────────────────────────────────────────────────
+  {
+    id: 8,
+    title: 'Diary App (Cassandra)',
+    theme: 'Backend · Distributed DB',
+    category: 'apps',
+    filters: ['software', 'web'],
+    demo: '📔',
+    short: 'Full-stack diary application with Apache Cassandra backend, session tracking, and a live dashboard with usage statistics.',
+    details: 'Node.js/Express backend connected to Apache Cassandra (v5) storing data across four tables: user_accounts, user_profiles, user_diary, and user_sessions. Implements full CRUD on diary entries (POST/GET/PUT/DELETE) and tracks session metadata — duration, pages visited, CRUD actions — to feed a real-time statistics dashboard. The dashboard displays session count, active users, average session duration, and diary action breakdowns. Cassandra was chosen for its distributed, write-optimized architecture and column-family data model, which maps naturally to append-heavy diary entries and session logs.',
+    techs: ['Node.js', 'Apache Cassandra', 'CQL', 'REST API', 'JavaScript'],
+    hours: 80,
+    link: 'https://github.com/AidanAcartis'
+  },
+  {
+    id: 12,
+    title: 'Product Manager (React Native)',
+    theme: 'Mobile App',
+    category: 'apps',
+    filters: ['mobile', 'software'],
+    demo: '📱',
+    short: 'Cross-platform mobile app for product CRUD with auth, image upload, advanced filters, and user profile management.',
+    details: 'Built with React Native and Expo, backed by json-server simulating a REST API (/users, /products, /categories). Features: Sign Up / Sign In with AsyncStorage session persistence, paginated product list, full CRUD (add, edit, delete with multi-select), image upload via expo-image-picker with preview, and advanced filtering by category buttons, seller name, maximum price, and text search. User profile page shows personal info and a count of products created. Navigation via expo-router with tab layout. Axios handles all API calls. Product sharing button stubbed for future implementation.',
+    techs: ['React Native', 'Expo', 'Axios', 'AsyncStorage', 'json-server', 'expo-router'],
+    hours: 70,
+    link: 'https://github.com/AidanAcartis'
+  },
+
+  // ── 5. Experiments ────────────────────────────────────────────────────────
+  {
+    id: 11,
+    title: 'Firework — Pixel Disintegration',
+    theme: 'Creative Coding · Canvas',
+    category: 'experiments',
+    filters: ['javascript', 'software'],
+    demo: '✨',
+    short: 'Image that explodes into individual pixels like fireworks, then reassembles particle by particle back into the original photo.',
+    details: 'A canvas-based particle system that reads every pixel of a source image, stores its color and target position, then launches each pixel outward with randomized velocity and gravity to simulate an explosion. Each particle follows a physics trajectory (velocity decay, gravity pull) before reversing and homing back to its exact pixel coordinate in the original image. The reassembly phase uses easing functions to lock particles smoothly into place, reconstructing the photo. The effect is a full cycle: intact image → pixel explosion → particle flight → pixel reassembly. No libraries — raw Canvas 2D API and requestAnimationFrame.',
+    techs: ['JavaScript', 'HTML5 Canvas', 'Particle Physics', 'requestAnimationFrame'],
+    hours: 30,
+    link: 'https://github.com/AidanAcartis'
+  },
+  {
+    id: 10,
+    title: 'SQL Query Visualizer',
+    theme: 'Web · Data Visualization',
+    category: 'experiments',
+    filters: ['software', 'web'],
+    demo: '📊',
+    short: 'Flask interface that executes SQL queries and lets you write Plotly code to instantly visualize the results as interactive charts.',
+    details: 'A Flask backend exposes an endpoint that runs arbitrary SQL queries against the database and returns results as JSON. The frontend (HTML/CSS/JS) provides a terminal-style SQL input, a live result preview (toggle show/hide), and a Plotly code editor where you describe the chart (trace, layout: title, axis labels). Clicking \'Draw the graph\' renders the visualization inline with clickable data points. A simulation script (simulation.py) auto-replays 10 preset SQL + Plotly scenarios from plots_sql.json, pausing between each for user confirmation — useful for demos and testing.',
+    techs: ['Python', 'Flask', 'SQL', 'Plotly', 'JavaScript', 'HTML/CSS'],
+    hours: 40,
+    link: 'https://github.com/AidanAcartis'
+  },
+  {
+    id: 9,
+    title: 'MongoDB Library Management',
+    theme: 'Full Stack · Distributed DB',
+    category: 'experiments',
+    filters: ['software', 'web'],
+    demo: '📚',
+    short: 'Library management system with MongoDB replica set, role-based access (admin/user), loan workflow, and rich analytics dashboard.',
+    details: 'Full-stack React + Node.js/Express app backed by a 2-node MongoDB replica set (rs0). Users can sign up, browse books, borrow and reserve. Admins (inserted directly into DB with bcrypt-hashed passwords) approve/reject loan requests, confirm returns, send notifications, and access a full analytics dashboard. Dashboard components: BooksStats (category distribution, availability, top authors, monthly additions), LoansStats (loans and late returns per day/week/month/year), and UsersStats (monthly registrations, active vs inactive). All charts use Recharts (LineChart, BarChart, PieChart) with dynamic timeframe switching. Images stored in backend/public/uploads. Writes go to primary, reads optimized from secondaries.',
+    techs: ['React', 'Node.js', 'MongoDB', 'Replica Set', 'JWT', 'Recharts'],
+    hours: 120,
+    link: 'https://github.com/AidanAcartis'
+  }
+];
+
+// ── Category config ────────────────────────────────────────────────────────
+const CATEGORIES = [
+  { id: 'featured',     label: 'Featured',          icon: '★' },
+  { id: 'ai',          label: 'AI & Data',          icon: '◈' },
+  { id: 'systems',     label: 'Systems & Algorithms', icon: '◎' },
+  { id: 'apps',        label: 'Applications',       icon: '◻' },
+  { id: 'experiments', label: 'Experiments',        icon: '◇' }
+];
+
+// Tech filter tags (keep in sync with HTML data-filter buttons)
+let activeFilters = new Set();
+
+// ── Init ───────────────────────────────────────────────────────────────────
+function initProjects() {
+  try {
+    setupFilters();
+    renderProjects();
+  } catch (err) {
+    console.error('Projects init error:', err);
+    document.getElementById('projectsGrid').innerHTML =
+      '<div class="empty-state">// Error initializing projects.</div>';
+  }
+}
+
+// ── Filters ────────────────────────────────────────────────────────────────
+function setupFilters() {
+  const existingBtns = document.querySelectorAll('#filterBar .filter-btn');
+
+  existingBtns.forEach(btn => {
+    if (btn.classList.contains('active')) {
+      activeFilters.add(btn.dataset.filter);
+    }
+    btn.addEventListener('click', () => {
+      activeFilters.clear();
+      document.querySelectorAll('#filterBar .filter-btn').forEach(b => b.classList.remove('active'));
+      activeFilters.add(btn.dataset.filter);
+      btn.classList.add('active');
+      renderProjects();
+    });
+  });
+
+  addClearAllButton();
+}
+
+function addClearAllButton() {
+  const bar = document.getElementById('filterBar');
+
+  const allBtn = document.createElement('button');
+  allBtn.className = 'filter-btn filter-all';
+  allBtn.textContent = 'All';
+  allBtn.addEventListener('click', () => {
+    activeFilters.clear();
+    document.querySelectorAll('#filterBar .filter-btn:not(.filter-all)').forEach(b => {
+      b.classList.remove('active');
+      activeFilters.add(b.dataset.filter);
+      b.classList.add('active');
+    });
+    renderProjects();
+  });
+
+  const noneBtn = document.createElement('button');
+  noneBtn.className = 'filter-btn filter-none';
+  noneBtn.textContent = 'None';
+  noneBtn.addEventListener('click', () => {
+    activeFilters.clear();
+    document.querySelectorAll('#filterBar .filter-btn:not(.filter-all):not(.filter-none)').forEach(b => {
+      b.classList.remove('active');
+    });
+    renderProjects();
+  });
+
+  bar.appendChild(allBtn);
+  bar.appendChild(noneBtn);
+}
+
+// ── Render ─────────────────────────────────────────────────────────────────
+function renderProjects() {
+  const grid = document.getElementById('projectsGrid');
+
+  const filtered = activeFilters.size === 0
+  ? allProjects
+  : allProjects.filter(p => activeFilters.has(p.category));
+
+  if (filtered.length === 0) {
+    grid.innerHTML = '<div class="empty-state">// No projects match this filter.</div>';
+    return;
+  }
+
+  // Group by category in order
+  let html = '';
+  CATEGORIES.forEach(cat => {
+    const catProjects = filtered.filter(p => p.category === cat.id);
+    if (catProjects.length === 0) return;
+
+    html += `
+      <div class="category-section">
+        <div class="category-header">
+          <span class="category-icon">${cat.icon}</span>
+          <span class="category-label">${cat.label}</span>
+        </div>
+        <div class="category-grid">
+          ${catProjects.map(p => buildCard(p)).join('')}
+        </div>
+      </div>
+    `;
+  });
+
+  grid.innerHTML = html;
+
+  // Stagger animation
+  grid.querySelectorAll('.project-card').forEach((card, i) => {
+    card.style.animationDelay = `${i * 60}ms`;
+    card.classList.add('card-enter');
+  });
+}
+
+function buildCard(p) {
+  const techsHtml = p.techs
+    .map(t => `<span class="tech-tag">${t}</span>`)
+    .join('');
+
+  const featuredBadge = p.category === 'featured'
+    ? '<span class="featured-badge">Featured</span>'
+    : '';
+
+  return `
+    <div class="project-card${p.category === 'featured' ? ' project-card--featured' : ''}" onclick="openModal(${p.id})">
+      <div class="project-demo">
+        ${featuredBadge}
+        <span class="demo-emoji">${p.demo}</span>
+        <div class="demo-scanline"></div>
+      </div>
+      <div class="project-info">
+        <div class="project-title">${p.title}</div>
+        <div class="project-theme">${p.theme}</div>
+        <div class="project-desc">${p.short}</div>
+        <div class="project-meta">
+          <div class="meta-item"><span>⏱</span> ${p.hours}h dev</div>
+          <div class="tech-tags">${techsHtml}</div>
+        </div>
+      </div>
+      <div class="project-actions">
+        <a href="${p.link}" target="_blank" class="btn-sm btn-outline" onclick="event.stopPropagation()">GitHub ↗</a>
+        <button class="btn-sm btn-primary" onclick="event.stopPropagation(); openModal(${p.id})">Details</button>
+      </div>
+    </div>
+  `;
+}
+
+// ── Modal ──────────────────────────────────────────────────────────────────
+function openModal(id) {
+  const p = allProjects.find(x => x.id === id);
+  if (!p) return;
+
+  document.getElementById('modalTitle').textContent = p.title;
+  document.getElementById('modalTheme').textContent = p.theme;
+  document.getElementById('modalDesc').textContent = p.details;
+  document.getElementById('modalTechs').innerHTML = p.techs
+    .map(t => `<span class="tech-tag">${t}</span>`).join('');
+  document.getElementById('modalHours').textContent = `${p.hours} hours of development`;
+  document.getElementById('modalLink').href = p.link;
+
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+// ── Modal close handlers ───────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  const closeBtn = document.getElementById('modalClose');
+  const overlay  = document.getElementById('modalOverlay');
+
+  if (closeBtn) closeBtn.onclick = () => overlay.classList.remove('open');
+  if (overlay)  overlay.onclick  = e => { if (e.target === overlay) overlay.classList.remove('open'); };
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') overlay?.classList.remove('open');
+  });
+
+  initProjects();
+  initFairy();
+});
+
+// ── FAIRY ──────────────────────────────────────────────────────────────────
+function initFairy() {
+  const fairy = document.getElementById('fairy');
+  if (!fairy) return;
+
+  let fx = window.innerWidth / 2;
+  let fy = window.innerHeight / 2;
+  let tx = fx, ty = fy;
+
+  document.addEventListener('mousemove', e => {
+    tx = e.clientX;
+    ty = e.clientY;
+  });
+
+  function spawnTrail(x, y) {
+    const t = document.createElement('div');
+    t.className = 'fairy-trail';
+    const s = Math.random() * 5 + 3;
+    t.style.cssText = `
+      width:${s}px;
+      height:${s}px;
+      left:${x - s/2}px;
+      top:${y - s/2}px;
+    `;
+    document.body.appendChild(t);
+    setTimeout(() => t.remove(), 800);
+  }
+
+  let lastTrail = 0;
+
+  function animFairy() {
+    fx += (tx - fx) * 0.08;
+    fy += (ty - fy) * 0.08;
+
+    fairy.style.left = (fx - 14) + 'px';
+    fairy.style.top  = (fy - 14) + 'px';
+
+    const now = Date.now();
+    if (now - lastTrail > 80) {
+      spawnTrail(fx, fy);
+      lastTrail = now;
+    }
+
+    requestAnimationFrame(animFairy);
+  }
+
+  animFairy();
+}
