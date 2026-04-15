@@ -76,7 +76,7 @@ const allProjects = [
     theme: 'NLP · Intent Detection · AI . Abstraction Learning',
     category: 'ai',
     filters: ['ml', 'software'],
-    demo: 'assets/gifs/output.gif',
+    demo: 'assets/images/intention_prediction_architecture.png',
     short: 'Model that infers high-level user intent from sequences of task items.',
     details: 'A fine-tuned Flan-T5 model that takes structured task sequences as input and predicts the global objective behind them. Used for user intent inference and behavioral abstraction.',
     techs: [
@@ -87,8 +87,8 @@ const allProjects = [
       'NLP',
       'Sequence-to-Sequence'
     ],
-    hours: 70,
-    link: 'https://github.com/AidanAcartis'
+    hours: 532,
+    link: 'https://github.com/AidanAcartis/Global_Task_Description'
   },
 
   {
@@ -97,12 +97,12 @@ const allProjects = [
     theme: 'NLP · Machine Learning',
     category: 'ai',
     filters: ['ml', 'software'],
-    demo: 'assets/gifs/output.gif',
+    demo: 'assets/images/newsgroups_pipeline_architecture.png',
     short: 'Rigorous NLP benchmark comparing BoW, TF-IDF and N-grams across four classifiers with full hyperparameter tuning.',
     details: 'Explored three feature extraction strategies — Bag-of-Words (unigrams), TF-IDF, and N-grams (N≥2) — each paired with Softmax, Linear SVM, Random Forest, and Gradient Boosting classifiers. The pipeline covers EDA (class imbalance, outlier detection, t-SNE visualization), full text preprocessing (lowercasing, tokenization, stopword removal, lemmatization), and hyperparameter tuning via Grid Search. TF-IDF + Linear SVM achieved the best test score (0.741). Key insight: feature engineering matters more than model choice for classical NLP.',
     techs: ['Python', 'Scikit-learn', 'NLTK', 'Pandas', 'Matplotlib'],
-    hours: 80,
-    link: 'https://github.com/AidanAcartis/Text-feature-extraction-classification'
+    hours: 48,
+    link: 'https://github.com/AidanAcartis/Texte-Feature-Extraction'
   },
   {
     id: 3,
@@ -110,12 +110,12 @@ const allProjects = [
     theme: 'Computer Vision · ML',
     category: 'ai',
     filters: ['ml', 'software'],
-    demo: 'assets/gifs/output.gif',
+    demo: 'assets/images/cifar10_evolution_architecture.png',
     short: 'Progressive image classification pipeline: raw pixels → HOG features → VGG16 transfer learning, with classical ML models.',
     details: 'Benchmarked image classification on CIFAR-10 using three increasingly powerful feature representations. Starting from raw pixel values with Logistic Regression and SVM, then applying HOG (Histogram of Oriented Gradients) with PCA dimensionality reduction, and finally extracting deep features from a pre-trained VGG16 model. Each stage was evaluated with multiple classifiers and hyperparameter tuning (Grid Search, Randomized Search). Kernel SVM on VGG16 features achieved the best performance. The notebook demonstrates how the right feature representation can transform a poor baseline into a competitive model without training a deep network from scratch.',
     techs: ['Python', 'TensorFlow', 'Scikit-learn', 'OpenCV', 'PCA', 'VGG16'],
-    hours: 90,
-    link: 'https://github.com/AidanAcartis'
+    hours: 48,
+    link: 'https://github.com/AidanAcartis/Image-classification-feature-extraction'
   },
 
   // ── 3. Systems & Algorithms ───────────────────────────────────────────────
@@ -340,13 +340,19 @@ function buildCard(p) {
 
   const demoHtml = isVideo
     ? `
-      <video class="demo-gif" autoplay loop muted playsinline>
+      <video class="video-main" autoplay loop muted playsinline>
         <source src="${p.demo}" type="video/webm">
       </video>
       <div class="demo-scanline"></div>
     `
     : `
-      <img class="demo-gif" src="${p.demo}" alt="${p.title} demo">
+      <div class="img-controls">
+        <button class="btn-zoom-toggle" onclick="toggleExpand(this)">SHOW [+]</button>
+      </div>
+      <img class="demo-gif" 
+          src="${p.demo}" 
+          alt="${p.title} demo" 
+          onclick="handleImageClick(this)">
       <div class="demo-scanline"></div>
     `;
 
@@ -378,6 +384,55 @@ function buildCard(p) {
       </div>
     </div>
   `;
+}
+
+// Fonctions pour gérer le zoom
+function toggleZoom(btn) {
+    const container = btn.closest('.project-demo');
+    container.classList.toggle('expanded');
+}
+
+// Remplace tes anciennes fonctions de zoom par celles-ci :
+
+function handleImageClick(img) {
+  const container = img.closest('.project-demo');
+  if (container.classList.contains('expanded')) {
+    const isZooming = img.classList.toggle('zoomed-in');
+    
+    if (isZooming) {
+      // On ajoute l'écouteur de mouvement uniquement quand on zoom
+      img.onmousemove = (e) => {
+        const { left, top, width, height } = img.getBoundingClientRect();
+        // Calcul du pourcentage de la position de la souris dans l'image
+        const x = ((e.pageX - left - window.scrollX) / width) * 100;
+        const y = ((e.pageY - top - window.scrollY) / height) * 100;
+        
+        // On déplace l'origine du zoom vers la souris
+        img.style.transformOrigin = `${x}% ${y}%`;
+      };
+    } else {
+      // On nettoie quand on dé-zoom
+      img.onmousemove = null;
+      img.style.transformOrigin = 'center center';
+    }
+  }
+}
+
+// Mise à jour de toggleExpand pour nettoyer le style si on ferme
+function toggleExpand(btn) {
+  const container = btn.closest('.project-demo');
+  const isExpanded = container.classList.toggle('expanded');
+  
+  btn.textContent = isExpanded ? 'CLOSE [-]' : 'SHOW [+]';
+  
+  if (!isExpanded) {
+    const img = container.querySelector('.demo-gif');
+    if (img) {
+      img.classList.remove('zoomed-in');
+      img.onmousemove = null;
+      img.style.transformOrigin = 'center center';
+    }
+  }
 }
 
 // ── Modal ──────────────────────────────────────────────────────────────────

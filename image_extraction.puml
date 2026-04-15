@@ -1,0 +1,78 @@
+@startuml cifar10_evolution_architecture
+
+skinparam defaultFontName Arial
+skinparam backgroundColor #FAFAFA
+skinparam shadowing false
+skinparam ArrowColor #555555
+skinparam ArrowThickness 1.5
+
+skinparam rectangle {
+  BorderColor #888888
+  BorderThickness 1
+  FontSize 13
+}
+
+title CIFAR-10 Pipeline: From Raw Pixels to Deep Features
+
+' ─────────────────────────────────────────────
+' STAGE 1: DATA INGESTION & EDA
+' ─────────────────────────────────────────────
+package "1. Data Foundation" #F0F8F0 {
+  rectangle "CIFAR-10 Dataset\n(32x32 RGB Images)" as RAW #DDDDDD
+  rectangle "EDA: Color Stats,\nDuplicates & Outliers" as EDA #A8DCC8
+  rectangle "Random Baseline\n(Accuracy ≈ 10%)" as BASE #F5B8A0
+  
+  RAW --> EDA
+  EDA --> BASE
+}
+
+' ─────────────────────────────────────────────
+' STAGE 2: FEATURE ENGINEERING STRATEGIES
+' ─────────────────────────────────────────────
+package "2. Feature Extraction Paths" #EEF0FF {
+  
+  package "Path A: Raw Pixels" #D8D4F8 {
+    rectangle "Flattening & [0,1] Scaling" as PIXELS #C8C4F0
+    rectangle "PCA Reduction (256 components)" as PCA_RAW #C8C4F0
+  }
+  
+  package "Path B: Structural Features" #D8D4F8 {
+    rectangle "HOG Extraction\n(Hist. of Oriented Gradients)" as HOG #C8C4F0
+    rectangle "Standardization" as STD #C8C4F0
+  }
+  
+  package "Path C: Deep Transfer Learning" #D8D4F8 {
+    rectangle "VGG16 Backbone\n(Pre-trained on ImageNet)" as VGG #F5C870
+    rectangle "Global Average Pooling" as GAP #F5C870
+  }
+}
+
+' ─────────────────────────────────────────────
+' STAGE 3: CLASSIFICATION BENCHMARK
+' ─────────────────────────────────────────────
+package "3. Model Evaluation Suite" #FFF8EE {
+  rectangle "Logistic Regression\n(SAGA Solver)" as LOGREG #A8DCC8
+  rectangle "SVM (Linear / RBF Kernel)" as SVM #A8DCC8
+  rectangle "K-Nearest Neighbors" as KNN #A8DCC8
+  
+  PIXELS --> LOGREG
+  PCA_RAW --> SVM
+  HOG --> SVM
+  VGG --> SVM
+  VGG --> LOGREG
+}
+
+' ─────────────────────────────────────────────
+' STAGE 4: PERFORMANCE EVOLUTION
+' ─────────────────────────────────────────────
+package "4. Results Progression" #F5F5F5 {
+  rectangle "Level 1: Raw Pixels\n~40-52% Acc" as R1 #FFCCCC
+  rectangle "Level 2: HOG Features\n~48-57% Acc" as R2 #FFE5CC
+  rectangle "Level 3: VGG16 Features\n~84-87% Acc" as R3 #D5F5E3
+}
+
+LOGREG ..> R1
+HOG ..> R2
+VGG ..> R3
+
+@enduml

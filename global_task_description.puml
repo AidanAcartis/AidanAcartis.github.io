@@ -1,0 +1,88 @@
+@startuml intention_prediction_architecture
+
+skinparam defaultFontName Arial
+skinparam backgroundColor #FAFAFA
+skinparam shadowing false
+skinparam ArrowColor #555555
+skinparam ArrowThickness 1.5
+
+skinparam rectangle {
+  BorderColor #888888
+  BorderThickness 1
+  FontSize 13
+}
+
+title Intent Prediction Pipeline: Seq2Seq Task Synthesis
+
+' ─────────────────────────────────────────────
+' SECTION 1: DATA PREPARATION
+' ─────────────────────────────────────────────
+
+package "Data Engineering & Formatting" #F0F8F0 {
+  rectangle "Raw JSONL Data\n(Cluster items)" as RAW #DDDDDD
+  rectangle "Stratified Split\n(Train / Val / Test)" as SPLIT #A8DCC8
+  rectangle "Prompt Template\n'Based on the following list...'" as PROMPT #F5C870
+  
+  RAW --> SPLIT
+  SPLIT --> PROMPT
+}
+
+' ─────────────────────────────────────────────
+' SECTION 2: TOKENIZATION & TENSOR LOADING
+' ─────────────────────────────────────────────
+
+package "Input Processing (T5TokenizerFast)" #EEF0FF {
+  rectangle "Task Items List" as LIST #DDDDDD
+  rectangle "Padding & Truncation\n(Max Length: 512)" as TOK #C8C4F0
+  rectangle "BFloat16 Tensors\n(GPU Optimized)" as BF16 #C8C4F0
+  
+  PROMPT --> LIST
+  LIST --> TOK
+  TOK --> BF16
+}
+
+' ─────────────────────────────────────────────
+' SECTION 3: BACKBONE MODEL
+' ─────────────────────────────────────────────
+
+package "Backbone: Flan-T5-Small (Seq2Seq)" #F5F5F5 {
+  
+  package "Encoder Stack" #D8D4F8 {
+    rectangle "Self-Attention Layers" as ENC_ATT #C8C4F0
+    rectangle "Bi-directional Context" as ENC_CTX #C8C4F0
+  }
+  
+  package "Decoder Stack (Autoregressive)" #D8F0E4 {
+    rectangle "Cross-Attention\n(on Encoder Output)" as CROSS #A8DCC8
+    rectangle "Beam Search (k=4)\nGeneration" as BEAM #A8DCC8
+  }
+
+  BF16 --> ENC_ATT
+  ENC_ATT --> ENC_CTX
+  ENC_CTX --> CROSS
+  CROSS --> BEAM
+}
+
+' ─────────────────────────────────────────────
+' SECTION 4: EVALUATION LOOP
+' ─────────────────────────────────────────────
+
+package "Evaluation & Metrics" #FFF8EE {
+  rectangle "Generated Intention" as GEN #F5B8A0
+  rectangle "Ground Truth Label" as GT #DDDDDD
+  rectangle "ROUGE Score Calculation\n(1, 2, L)" as METRIC #F5C870
+  
+  BEAM --> GEN
+  GEN --> METRIC
+  GT --> METRIC
+}
+
+note bottom of METRIC
+  **Final Performance:**
+  ROUGE-L: 0.3993
+  ROUGE-2: 0.1862
+  *Achieved with bfloat16 & 
+  EarlyStoppingCallback*
+end note
+
+@enduml
