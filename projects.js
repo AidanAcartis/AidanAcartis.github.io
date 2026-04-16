@@ -204,46 +204,35 @@ const allProjects = [
     hours: 70,
     link: 'https://github.com/AidanAcartis'
   },
+  {
+    id: 17,
+    title: 'MTScan — Multi-Tool Security Scanner',
+    theme: 'Cybersecurity · Network & Web Scanning',
+    category: 'security',
+    filters: ['security', 'software'],
 
-  // ── 5. Experiments ────────────────────────────────────────────────────────
-  {
-    id: 11,
-    title: 'Firework — Pixel Disintegration',
-    theme: 'Creative Coding · Canvas',
-    category: 'experiments',
-    filters: ['javascript', 'software'],
-    demo: 'assets/gifs/video.webm',
-    short: 'Image that explodes into individual pixels like fireworks, then reassembles particle by particle back into the original photo.',
-    details: 'A canvas-based particle system that reads every pixel of a source image, stores its color and target position, then launches each pixel outward with randomized velocity and gravity to simulate an explosion. Each particle follows a physics trajectory (velocity decay, gravity pull) before reversing and homing back to its exact pixel coordinate in the original image. The reassembly phase uses easing functions to lock particles smoothly into place, reconstructing the photo. The effect is a full cycle: intact image → pixel explosion → particle flight → pixel reassembly. No libraries — raw Canvas 2D API and requestAnimationFrame.',
-    techs: ['JavaScript', 'HTML5 Canvas', 'Particle Physics', 'requestAnimationFrame'],
-    hours: 30,
-    link: 'https://github.com/AidanAcartis'
-  },
-  {
-    id: 10,
-    title: 'SQL Query Visualizer',
-    theme: 'Web · Data Visualization',
-    category: 'experiments',
-    filters: ['software', 'web'],
-    demo: 'assets/gifs/video.webm',
-    short: 'Flask interface that executes SQL queries and lets you write Plotly code to instantly visualize the results as interactive charts.',
-    details: 'A Flask backend exposes an endpoint that runs arbitrary SQL queries against the database and returns results as JSON. The frontend (HTML/CSS/JS) provides a terminal-style SQL input, a live result preview (toggle show/hide), and a Plotly code editor where you describe the chart (trace, layout: title, axis labels). Clicking \'Draw the graph\' renders the visualization inline with clickable data points. A simulation script (simulation.py) auto-replays 10 preset SQL + Plotly scenarios from plots_sql.json, pausing between each for user confirmation — useful for demos and testing.',
-    techs: ['Python', 'Flask', 'SQL', 'Plotly', 'JavaScript', 'HTML/CSS'],
-    hours: 40,
-    link: 'https://github.com/AidanAcartis'
-  },
-  {
-    id: 9,
-    title: 'MongoDB Library Management',
-    theme: 'Full Stack · Distributed DB',
-    category: 'experiments',
-    filters: ['software', 'web'],
-    demo: 'assets/gifs/video.webm',
-    short: 'Library management system with MongoDB replica set, role-based access (admin/user), loan workflow, and rich analytics dashboard.',
-    details: 'Full-stack React + Node.js/Express app backed by a 2-node MongoDB replica set (rs0). Users can sign up, browse books, borrow and reserve. Admins (inserted directly into DB with bcrypt-hashed passwords) approve/reject loan requests, confirm returns, send notifications, and access a full analytics dashboard. Dashboard components: BooksStats (category distribution, availability, top authors, monthly additions), LoansStats (loans and late returns per day/week/month/year), and UsersStats (monthly registrations, active vs inactive). All charts use Recharts (LineChart, BarChart, PieChart) with dynamic timeframe switching. Images stored in backend/public/uploads. Writes go to primary, reads optimized from secondaries.',
-    techs: ['React', 'Node.js', 'MongoDB', 'Replica Set', 'JWT', 'Recharts'],
-    hours: 120,
-    link: 'https://github.com/AidanAcartis'
+    demo: 'assets/gifs/mtscan.webm',
+
+    short: 'Full-stack security scanning platform that orchestrates Nmap and Gobuster with real-time results, API access, and interactive analysis dashboard.',
+
+    details: 'MTScan is a full-stack cybersecurity platform designed to automate network and web reconnaissance workflows. Built as a team project, it integrates Nmap for network scanning and Gobuster for web enumeration into a unified system with a modular backend and real-time frontend. The backend exposes a REST API (Flask) with Swagger/OpenAPI documentation, while the frontend provides a terminal-like interface with live logs via WebSockets. The system supports multiple scan profiles, custom port configurations, automatic Gobuster triggering on HTTP detection, and structured result aggregation. Outputs are enriched with risk-based recommendations, visualized through interactive charts, and stored for historical analysis and JSON export. The architecture follows a clean separation of concerns (services, routes, models) and is designed for extensibility and integration.',
+
+    techs: [
+      'Python',
+      'Flask',
+      'REST API',
+      'WebSockets',
+      'Nmap',
+      'Gobuster',
+      'JavaScript',
+      'HTML/CSS',
+      'Chart.js',
+      'Swagger/OpenAPI'
+    ],
+
+    hours: 120, // ajuste si besoin
+
+    link: 'https://github.com/sahyan19/MTScan'
   }
 ];
 
@@ -253,7 +242,7 @@ const CATEGORIES = [
   { id: 'ai', label: 'AI & Data', icon: '◈' },
   { id: 'algorithm', label: 'Systems & Algorithms', icon: '◎' },
   { id: 'apps', label: 'Applications', icon: '◻' },
-  { id: 'experiments', label: 'Experiments', icon: '◇' }
+  {id: 'security', label: 'Security', icon: '🛡️'}
 ];
 
 // Tech filter tags (keep in sync with HTML data-filter buttons)
