@@ -122,15 +122,15 @@ const allProjects = [
   {
     id: 7,
     title: 'All-Valid Sudoku Generator',
-    theme: 'Backtracking · C',
+    theme: 'Combinatorial Enumeration · C',
     category: 'algorithm',
     filters: ['math', 'c', 'software'],
-    demo: 'assets/gifs/video.webm',
-    short: 'Second personal C project — no AI, no Stack Overflow. Exhaustively generates all valid n×n Sudoku grids using backtracking and combinatorics.',
-    details: 'Written without AI assistance or Stack Overflow. Generates all valid Sudoku grids of size n×n (n = k²: 4, 9, 16…) using a combinatorial counter matrix boucle[][] that acts as a multi-digit positional counter for all possible placements. For each permutation, RemplirUpletComplet() applies constraint checks — row validity (ConditionLigne()), block validity (ConditionBloc()), and presence testing (TestPresence()) — then backtracks when no valid placement exists. Outputs Grid0 (cell numbering), uplet placement grids, and final valid Sudoku matrices. For 4×4, all valid configurations are found. Exhaustive for larger sizes.',
-    techs: ['C', 'Backtracking', 'Combinatorics', 'Constraint satisfaction'],
-    hours: 60,
-    link: 'https://github.com/AidanAcartis'
+    demo: 'assets/gifs/sudoku.webm',
+    short: 'Second personal C project. Exhaustively enumerates all valid n×n Sudoku grids using a combinatorial counter matrix and constraint pruning.',
+    details: 'This is the most challenging project I’ve developed. It was also the first project I built after learning the C programming language. Enumerates all valid Sudoku grids of size n×n (n = k²: 4, 9, 16…) using a multi-base positional counter matrix boucle[][] that systematically indexes every permutation of cell placements. For each candidate configuration, RemplirUpletComplet() builds an intermediate placement matrix Uplet — where Uplet[r][c] is the grid position assigned to number r+1 — using a cyclic class rotation: Classe[(r+c) mod N][boucle[r][c]]. Three constraint checks gate each assignment: ConditionLigne() (no two numbers share a sudoku row), ConditionBloc() (no two numbers share a k×k block), and TestPresence() (no number repeats across prior rows). When a constraint fails, the counter for that cell is incremented; if it overflows N, the algorithm steps back to a previous cell — an iterative, non-recursive local backtrack. Once a complete Uplet is found, construireSudoku() converts positions to (row, col) coordinates and fills the final grid. Each candidate is verified by estSudokuValide(). The search is exhaustive: for 4×4, all valid configurations are found.',
+    techs: ['C', 'Combinatorial enumeration', 'Constraint satisfaction', 'Iterative backtracking'],
+    hours: 4800,
+    link: 'https://github.com/AidanAcartis/AlgoGenSudoku'
   },
   {
     id: 6,
@@ -138,12 +138,12 @@ const allProjects = [
     theme: 'Combinatorics · C',
     category: 'algorithm',
     filters: ['math', 'c', 'software'],
-    demo: 'assets/gifs/video.webm',
-    short: 'First-ever personal C project — no AI, no Stack Overflow. Generates all Latin squares via cyclic permutations and exhaustive exploration.',
-    details: 'Written entirely without AI assistance or Stack Overflow as a first C project. Generates Latin squares of order n from an initial permutation using cyclic shifts: Square[i][j] = t[(i+j) mod n]. The program iterates through all n! permutations of the first row using FonctionPermut(), builds the corresponding Latin square for each, and counts generated permutations. Optimized with n!/2 to reduce iterations. Modular structure: main.c, boucles.c, permutation.c, utils.c with separate headers. Demonstrates mastery of pointers, modular C, and combinatorial thinking from first principles.',
-    techs: ['C', 'Combinatorics', 'Permutations', 'Modular arithmetic'],
-    hours: 50,
-    link: 'https://github.com/AidanAcartis'
+    demo: 'assets/gifs/Carre_Latin.webm',
+    short: 'First personal C project with AlgoGenSudoku. Generates all Latin squares of order n via two-level permutation enumeration.',
+    details: 'Also one of my most difficult project, written entirely without AI assistance or Stack Overflow as a first C project, like AlgoGenSudoku. Operates in two nested levels. Level 1 (BouclePermut): iterates through n!/2 distinct permutations of the base row t = [1,2,...,n] using a factorial-radix counter (Tour[], Permut[]) that drives FonctionPermut() — a circular sub-window shift applied to a sub-range of length permut, shifted by tour positions. For each valid permutation, a cyclic Latin square is built: Square[i][j] = t[(i+j) mod n]. Level 2 (BouclePermutCarre): for each Latin square produced, permutes its non-first rows by applying the same enumeration mechanism to the row-index sequence, generating all row-rearrangement variants. The two levels together cover the full combinatorial space of Latin squares derivable from cyclic construction. Modular structure: main.c, boucles.c, permutation.c, utils.c with separate headers.',
+    techs: ['C', 'Combinatorics', 'Permutation enumeration', 'Factorial-radix counter', 'Modular arithmetic'],
+    hours: 4320,
+    link: 'https://github.com/AidanAcartis/AlgoGenCarreLatin'
   },
   {
     id: 5,
@@ -151,27 +151,32 @@ const allProjects = [
     theme: 'Numerical Methods · Java',
     category: 'algorithm',
     filters: ['math', 'java', 'software'],
-    demo: 'assets/gifs/video.webm',
-    short: 'Exact linear system solver using Gauss-Jordan elimination with fraction arithmetic to eliminate all rounding errors.',
-    details: 'Solves any linear system P·X = B by transforming the augmented matrix (P|B) into Reduced Row Echelon Form using exact fraction arithmetic (no floating-point). The Fraction class handles all arithmetic symbolically. The algorithm detects inconsistency (rows of the form [0…0|b] with b≠0), handles free variables, reorders zero rows to the bottom, and reads solutions directly from the final RREF. Structured across five classes: Fraction, FractionApp, MatrixUtils, Solver, and Main. Accepts rational coefficient input in a/b form.',
-    techs: ['Java', 'Fraction Arithmetic', 'Linear Algebra', 'RREF'],
-    hours: 60,
-    link: 'https://github.com/AidanAcartis'
+    demo: 'assets/gifs/Linear-System-solver.webm',
+    short: 'Exact linear system solver using Gauss-Jordan elimination with fraction arithmetic — no floating-point, no rounding errors.',
+    details: 'Solves any linear system P·X = B by transforming the augmented matrix (P|B) into Reduced Row Echelon Form using exact symbolic fraction arithmetic throughout. The Fraction class handles add, subtract, multiply, divide, and inverse — all auto-simplified via recursive GCD, with sign always carried by the numerator. MatrixUtils.reduceToEchelonForm() locates each pivot column, normalises the pivot row by dividing through, then calls elimination(), which zeroes out all other entries in that column both above and below simultaneously — producing full RREF in a single forward pass rather than two separate phases. Solver.solve() checks for incompatibility (a zero row paired with a non-zero right-hand side), reorders zero rows to the bottom, and reads the solution vector directly from B. Under-determined systems are partially handled: zero rows are detected but free variables are not explicitly parameterised. Input is accepted as rational fractions in a/b form. Four classes: Fraction, MatrixUtils, Solver, Main.',
+    techs: ['Java', 'Exact fraction arithmetic', 'Linear algebra', 'RREF', 'Gauss-Jordan elimination'],
+    hours: 64,
+    link: 'https://github.com/AidanAcartis/Gauss-Jordan_Solver'
   },
   {
     id: 13,
-    title: 'Hexagonal Pathfinding (C++)',
-    theme: 'Algorithms · Game Logic',
+    title: 'Hexagonal Pathfinding Heuristic (C++)',
+    theme: 'Algorithms · Simulation · Game Logic',
     category: 'algorithm',
     filters: ['cpp', 'software', 'math'],
-    demo: 'assets/gifs/video.webm',
-    short: 'Shortest-path algorithm on a hexagonal grid with obstacle avoidance, comparing arrival times between friendly and enemy troops.',
-    details: 'Simulates troop movement on a hex grid toward a target camp, accounting for impassable cells and movement speed. Core functions: fonction1/fonction2 compute the shortest path, forChange/choice handle alternative routes when obstacles block direct movement, Verif/Forbid validate cell passability, and solution compares travel times between friendly and enemy troops (returning True if friendlies arrive first). Supports configurable starting positions, speeds, camp location, and obstacle sets. Two implementations: ModifyFarming.cpp (main) and OutputForModifyFarming.cpp (alternate dataset). Display helpers for debugging grid and path state.',
-    techs: ['C++', 'Graph algorithms', 'Pathfinding', 'Hex grid'],
-    hours: 45,
-    link: 'https://github.com/AidanAcartis'
-  },
 
+    demo: 'assets/gifs/PathFinding.webm',
+
+    short: 'Turn-based hex-grid simulation with heuristic pathfinding, obstacle-aware movement, and multi-agent travel time comparison.',
+
+    details: 'Simulates a turn-based navigation system on a hexagonal grid where two independent agents (friendly and enemy troops) move toward a shared objective (logging camp). Each agent computes its path iteratively using a multi-layer heuristic pipeline: (1) greedy directional attraction toward the target, (2) vector-based movement evaluation, (3) obstacle collision detection, and (4) fallback decision logic when direct movement is blocked. The system generates multiple candidate moves, evaluates their validity against impassable cells, scores them based on constraint violations, and selects the least restricted path. The process is executed step-by-step, producing a full trajectory trace for both agents. Each movement is logged and stored to reconstruct the complete path. Finally, the algorithm compares total travel time (path length × unit speed) between both agents to determine which arrives first.',
+
+    techs: ['C++', 'Heuristic Algorithms', 'Pathfinding', 'Simulation'],
+
+    hours: 60,
+
+    link: 'https://github.com/AidanAcartis/FarmingResources'
+  },
   // ── 4. Applications ───────────────────────────────────────────────────────
   {
     id: 8,
