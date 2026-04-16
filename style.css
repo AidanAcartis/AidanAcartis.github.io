@@ -846,3 +846,22 @@
     .about-right { flex-direction: row; }
     section { padding: 80px 4vw 40px; }
   }
+
+  /* Animation du curseur clignotant */
+.typed-cursor {
+  font-weight: bold;
+  color: var(--green); /* Ou la couleur principale de ton site */
+  animation: blink 0.8s infinite;
+  margin-left: 4px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+#typed-title {
+  min-height: 1.5em; /* Évite que la page ne saute quand le texte disparaît */
+  display: flex;
+  align-items: center;
+}
