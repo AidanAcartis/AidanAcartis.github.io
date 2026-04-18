@@ -180,16 +180,16 @@ const allProjects = [
   // ── 4. Applications ───────────────────────────────────────────────────────
   {
     id: 8,
-    title: 'Diary App (Cassandra)',
-    theme: 'Backend · Distributed DB',
+    title: 'Social Media Platform (Next.js)',
+    theme: 'Frontend · Backend · Social Network',
     category: 'apps',
     filters: ['software', 'web'],
-    demo: 'assets/gifs/video.webm',
-    short: 'Full-stack diary application with Apache Cassandra backend, session tracking, and a live dashboard with usage statistics.',
-    details: 'Node.js/Express backend connected to Apache Cassandra (v5) storing data across four tables: user_accounts, user_profiles, user_diary, and user_sessions. Implements full CRUD on diary entries (POST/GET/PUT/DELETE) and tracks session metadata — duration, pages visited, CRUD actions — to feed a real-time statistics dashboard. The dashboard displays session count, active users, average session duration, and diary action breakdowns. Cassandra was chosen for its distributed, write-optimized architecture and column-family data model, which maps naturally to append-heavy diary entries and session logs.',
-    techs: ['Node.js', 'Apache Cassandra', 'CQL', 'REST API', 'JavaScript'],
-    hours: 80,
-    link: 'https://github.com/AidanAcartis'
+    demo: 'assets/gifs/Social_media_app.webm',
+    short: 'Full-stack social media platform featuring authentication, user profiles, posts, messaging, and real-time interactions.',
+    details: 'Full-stack social media application built with Next.js (frontend) and Node.js/Express (backend). Implements secure user authentication and account creation, along with dynamic profile management (bio, avatar, activity). Core social features include post creation, threaded comments, reactions (likes), and a discussion forum system. Supports private messaging between users and a friend request system (send स्वीकार/decline, mutual connections). Backend exposes REST APIs handling all CRUD operations and relational interactions between users, posts, and messages. Designed with scalability in mind, structuring data flows to support high user interaction density and real-time updates. Focus on clean API architecture, modular components, and efficient state management on the frontend.',
+    techs: ['Next.js', 'Node.js', 'Express', 'REST API', 'JavaScript'],
+    hours: 600,
+    link: 'https://github.com/AidanAcartis/Social_Media'
   },
   {
     id: 12,
