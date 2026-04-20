@@ -2,12 +2,12 @@
 
 const words = [
   "Software Engineer",
-  "Machine Learning",
-  "Deep Learning",
-  "Data Science",
+  "Machine Learning Engineer",
+  "Web Developer",
+  "Deep Learning & NLP",
   "Computer Vision",
-  "NLP",
-  "Algorithms"
+  "Systems & Algorithms (C/C++)",
+  "Mobile Development (React Native)"
 ];
 
 let wordIndex = 0;

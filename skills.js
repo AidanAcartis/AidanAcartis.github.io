@@ -29,63 +29,63 @@ const CERTIFICATIONS = [
     issuer: "freeCodeCamp",
     year: "2026",
     image: "assets/certs/ML_Python.png",
-    link: ""
+    link: "https://www.freecodecamp.org/certification/fcc-a2c51ce3-6961-4459-bc86-5b59e442d6c7/machine-learning-with-python-v7"
   },
   {
     name: "Intermediate Machine Learning with Kaggle",
     issuer: "Kaggle",
     year: "2025",
     image: "assets/certs/ Intermediate-Machine-Learning.png",
-    link: ""
+    link: "https://www.kaggle.com/learn/certification/m1ssnad1a/intermediate-machine-learning"
   },
   {
     name: "Intro to Deep Learning",
     issuer: "Kaggle",
     year: "2025",
     image: "assets/certs/DL.png",
-    link: ""
+    link: "https://www.kaggle.com/learn/certification/m1ssnad1a/intro-to-deep-learning"
   },
   {
     name: "Problem Solving Intermediaire with C++",
     issuer: "Hackerrank",
     year: "2025",
     image: "assets/certs/solving_intermediaire.png",
-    link: ""
+    link: "https://www.hackerrank.com/certificates/iframe/711df0a31f1e"
   },
   {
     name: "Python basic",
     issuer: "Hackerrank",
     year: "2025",
     image: "assets/certs/python.png",
-    link: ""
+    link: "https://www.hackerrank.com/certificates/489cbde3d500?test_finished=true"
   },
   {
     name: "Software Engineer",
     issuer: "Hackerrank",
     year: "2025",
     image: "assets/certs/SE.png",
-    link: ""
+    link: "https://www.hackerrank.com/certificates/0ac216a0d969"
   },
   {
     name: "Certified in Cybersecurity",
     issuer: "ISC2",
     year: "2026",
     image: "assets/certs/cybersecurity.png",
-    link: ""
+    link: "https://AidanAcartis.github.io/assets/certs/cybersecurity.png"
   },
   {
     name: "Network Security",
     issuer: "ISC2",
     year: "2026",
     image: "assets/certs/Network_Security.png",
-    link: ""
+    link: "https://AidanAcartis.github.io/assets/certs/Network_Security.png"
   },
   {
     name: "AWS Blockchain Manager",
     issuer: "Amazon Web Services",
     year: "2025",
     image: "assets/certs/Blockchain.png",
-    link: ""
+    link: "https://AidanAcartis.github.io/assets/certs/Blockchain.png"
   }
 ];
 

@@ -29,6 +29,7 @@ const allProjects = [
     hours: 80,
     link: 'https://github.com/AidanAcartis/Command-Describer'
   },
+
   // ── 2. AI & Data Projects ────────────────────────────────────────────────
   {
     id: 14,
@@ -39,14 +40,7 @@ const allProjects = [
     demo: 'assets/images/clustering_model.png',
     short: 'End-to-end semantic clustering pipeline that groups user activities into coherent, interpretable global tasks using sentence embeddings and hierarchical refinement.',
     details: 'Semantic Task Clustering is a full training and inference pipeline designed to transform raw user task items into semantically coherent clusters representing high-level global tasks. The system uses SentenceTransformer embeddings (MiniLM-L6-v2) and hierarchical agglomerative clustering, refined through iterative reclustering based on cohesion and silhouette score. The pipeline enforces a task hierarchy (sub-tasks → global task blocks), trains using implicit contrastive learning (MultipleNegativesRankingLoss), and supports singleton tasks as valid independent clusters. The inference stage includes multi-step refinement: global clustering, cohesion-based reclustering, singleton handling, and adaptive cluster splitting. The final output is a stable, interpretable set of task clusters directly usable in a user activity analysis system.',
-    techs: [
-      'Python',
-      'SentenceTransformers',
-      'scikit-learn',
-      'Cosine Similarity',
-      'NLP',
-      'Embeddings'
-    ],
+    techs: ['Python', 'SentenceTransformers', 'scikit-learn', 'Cosine Similarity', 'NLP', 'Embeddings'],
     hours: 330,
     link: 'https://github.com/AidanAcartis/Semantic-Task-Clustering'
   },
@@ -59,14 +53,7 @@ const allProjects = [
     demo: 'assets/images/filedescgen_architecture.png',
     short: 'Fine-tuned model that generates human-readable descriptions from raw filenames and system logs.',
     details: 'A sequence-to-text model trained to convert raw filenames, file metadata, and system events into natural language descriptions. Used for interpreting low-level system logs into meaningful semantic representations.',
-    techs: [
-      'Python',
-      'PyTorch',
-      'Transformers (T5)',
-      'Fine-tuning',
-      'PEFT (optional)',
-      'NLP'
-    ],
+    techs: ['Python', 'PyTorch', 'Transformers (T5)', 'Fine-tuning', 'PEFT (optional)', 'NLP'],
     hours: 1792,
     link: 'https://github.com/AidanAcartis/FileDescGen'
   },
@@ -79,18 +66,10 @@ const allProjects = [
     demo: 'assets/images/intention_prediction_architecture.png',
     short: 'Model that infers high-level user intent from sequences of task items.',
     details: 'A fine-tuned Flan-T5 model that takes structured task sequences as input and predicts the global objective behind them. Used for user intent inference and behavioral abstraction.',
-    techs: [
-      'Python',
-      'PyTorch',
-      'Transformers (Flan-T5)',
-      'LoRA (PEFT)',
-      'NLP',
-      'Sequence-to-Sequence'
-    ],
+    techs: ['Python', 'PyTorch', 'Transformers (Flan-T5)', 'LoRA (PEFT)', 'NLP', 'Sequence-to-Sequence'],
     hours: 532,
     link: 'https://github.com/AidanAcartis/Global_Task_Description'
   },
-
   {
     id: 2,
     title: 'Text Feature Extraction & Classification',
@@ -112,7 +91,7 @@ const allProjects = [
     filters: ['ml', 'software'],
     demo: 'assets/images/cifar10_evolution_architecture.png',
     short: 'Progressive image classification pipeline: raw pixels → HOG features → VGG16 transfer learning, with classical ML models.',
-    details: 'Benchmarked image classification on CIFAR-10 using three increasingly powerful feature representations. Starting from raw pixel values with Logistic Regression and SVM, then applying HOG (Histogram of Oriented Gradients) with PCA dimensionality reduction, and finally extracting deep features from a pre-trained VGG16 model. Each stage was evaluated with multiple classifiers and hyperparameter tuning (Grid Search, Randomized Search). Kernel SVM on VGG16 features achieved the best performance. The notebook demonstrates how the right feature representation can transform a poor baseline into a competitive model without training a deep network from scratch.',
+    details: 'Benchmarked image classification on CIFAR-10 using three increasingly powerful feature representations. Starting from raw pixel values with Logistic Regression and SVM, then applying HOG (Histogram of Oriented Gradients) with PCA dimensionality reduction, and finally extracting deep features from a pre-trained VGG16 model. Each stage was evaluated with multiple classifiers and hyperparameter tuning (Grid Search, Randomized Search). Kernel SVM on VGG16 features achieved the best performance.',
     techs: ['Python', 'TensorFlow', 'Scikit-learn', 'OpenCV', 'PCA', 'VGG16'],
     hours: 48,
     link: 'https://github.com/AidanAcartis/Image-classification-feature-extraction'
@@ -127,7 +106,7 @@ const allProjects = [
     filters: ['math', 'c', 'software'],
     demo: 'assets/gifs/sudoku.webm',
     short: 'Second personal C project. Exhaustively enumerates all valid n×n Sudoku grids using a combinatorial counter matrix and constraint pruning.',
-    details: 'This is the most challenging project I’ve developed. It was also the first project I built after learning the C programming language. Enumerates all valid Sudoku grids of size n×n (n = k²: 4, 9, 16…) using a multi-base positional counter matrix boucle[][] that systematically indexes every permutation of cell placements. For each candidate configuration, RemplirUpletComplet() builds an intermediate placement matrix Uplet — where Uplet[r][c] is the grid position assigned to number r+1 — using a cyclic class rotation: Classe[(r+c) mod N][boucle[r][c]]. Three constraint checks gate each assignment: ConditionLigne() (no two numbers share a sudoku row), ConditionBloc() (no two numbers share a k×k block), and TestPresence() (no number repeats across prior rows). When a constraint fails, the counter for that cell is incremented; if it overflows N, the algorithm steps back to a previous cell — an iterative, non-recursive local backtrack. Once a complete Uplet is found, construireSudoku() converts positions to (row, col) coordinates and fills the final grid. Each candidate is verified by estSudokuValide(). The search is exhaustive: for 4×4, all valid configurations are found.',
+    details: 'Enumerates all valid Sudoku grids of size n×n (n = k²: 4, 9, 16…) using a multi-base positional counter matrix boucle[][] that systematically indexes every permutation of cell placements. Three constraint checks gate each assignment: ConditionLigne(), ConditionBloc(), and TestPresence(). When a constraint fails the counter is incremented; overflow triggers an iterative local backtrack. Once a complete Uplet is found, construireSudoku() fills the final grid. Each candidate is verified by estSudokuValide().',
     techs: ['C', 'Combinatorial enumeration', 'Constraint satisfaction', 'Iterative backtracking'],
     hours: 4800,
     link: 'https://github.com/AidanAcartis/AlgoGenSudoku'
@@ -140,7 +119,7 @@ const allProjects = [
     filters: ['math', 'c', 'software'],
     demo: 'assets/gifs/Carre_Latin.webm',
     short: 'First personal C project with AlgoGenSudoku. Generates all Latin squares of order n via two-level permutation enumeration.',
-    details: 'Also one of my most difficult project, written entirely without AI assistance or Stack Overflow as a first C project, like AlgoGenSudoku. Operates in two nested levels. Level 1 (BouclePermut): iterates through n!/2 distinct permutations of the base row t = [1,2,...,n] using a factorial-radix counter (Tour[], Permut[]) that drives FonctionPermut() — a circular sub-window shift applied to a sub-range of length permut, shifted by tour positions. For each valid permutation, a cyclic Latin square is built: Square[i][j] = t[(i+j) mod n]. Level 2 (BouclePermutCarre): for each Latin square produced, permutes its non-first rows by applying the same enumeration mechanism to the row-index sequence, generating all row-rearrangement variants. The two levels together cover the full combinatorial space of Latin squares derivable from cyclic construction. Modular structure: main.c, boucles.c, permutation.c, utils.c with separate headers.',
+    details: 'Operates in two nested levels. Level 1 (BouclePermut): iterates through n!/2 distinct permutations of the base row using a factorial-radix counter that drives FonctionPermut() — a circular sub-window shift. For each valid permutation, a cyclic Latin square is built. Level 2 (BouclePermutCarre): permutes its non-first rows generating all row-rearrangement variants. Modular structure: main.c, boucles.c, permutation.c, utils.c.',
     techs: ['C', 'Combinatorics', 'Permutation enumeration', 'Factorial-radix counter', 'Modular arithmetic'],
     hours: 4320,
     link: 'https://github.com/AidanAcartis/AlgoGenCarreLatin'
@@ -153,7 +132,7 @@ const allProjects = [
     filters: ['math', 'java', 'software'],
     demo: 'assets/gifs/Linear-System-solver.webm',
     short: 'Exact linear system solver using Gauss-Jordan elimination with fraction arithmetic — no floating-point, no rounding errors.',
-    details: 'Solves any linear system P·X = B by transforming the augmented matrix (P|B) into Reduced Row Echelon Form using exact symbolic fraction arithmetic throughout. The Fraction class handles add, subtract, multiply, divide, and inverse — all auto-simplified via recursive GCD, with sign always carried by the numerator. MatrixUtils.reduceToEchelonForm() locates each pivot column, normalises the pivot row by dividing through, then calls elimination(), which zeroes out all other entries in that column both above and below simultaneously — producing full RREF in a single forward pass rather than two separate phases. Solver.solve() checks for incompatibility (a zero row paired with a non-zero right-hand side), reorders zero rows to the bottom, and reads the solution vector directly from B. Under-determined systems are partially handled: zero rows are detected but free variables are not explicitly parameterised. Input is accepted as rational fractions in a/b form. Four classes: Fraction, MatrixUtils, Solver, Main.',
+    details: 'Solves any linear system P·X = B by transforming the augmented matrix (P|B) into Reduced Row Echelon Form using exact symbolic fraction arithmetic throughout. The Fraction class handles all operations auto-simplified via recursive GCD. MatrixUtils.reduceToEchelonForm() produces full RREF in a single forward pass. Solver.solve() checks for incompatibility, reorders zero rows, and reads the solution directly from B.',
     techs: ['Java', 'Exact fraction arithmetic', 'Linear algebra', 'RREF', 'Gauss-Jordan elimination'],
     hours: 64,
     link: 'https://github.com/AidanAcartis/Gauss-Jordan_Solver'
@@ -164,19 +143,14 @@ const allProjects = [
     theme: 'Algorithms · Simulation · Game Logic',
     category: 'algorithm',
     filters: ['cpp', 'software', 'math'],
-
     demo: 'assets/gifs/PathFinding.webm',
-
     short: 'Turn-based hex-grid simulation with heuristic pathfinding, obstacle-aware movement, and multi-agent travel time comparison.',
-
-    details: 'Simulates a turn-based navigation system on a hexagonal grid where two independent agents (friendly and enemy troops) move toward a shared objective (logging camp). Each agent computes its path iteratively using a multi-layer heuristic pipeline: (1) greedy directional attraction toward the target, (2) vector-based movement evaluation, (3) obstacle collision detection, and (4) fallback decision logic when direct movement is blocked. The system generates multiple candidate moves, evaluates their validity against impassable cells, scores them based on constraint violations, and selects the least restricted path. The process is executed step-by-step, producing a full trajectory trace for both agents. Each movement is logged and stored to reconstruct the complete path. Finally, the algorithm compares total travel time (path length × unit speed) between both agents to determine which arrives first.',
-
+    details: 'Simulates a turn-based navigation system on a hexagonal grid where two independent agents move toward a shared objective. Each agent computes its path using a multi-layer heuristic pipeline: greedy directional attraction, vector-based movement evaluation, obstacle collision detection, and fallback logic when blocked. The algorithm compares total travel time between both agents to determine which arrives first.',
     techs: ['C++', 'Heuristic Algorithms', 'Pathfinding', 'Simulation'],
-
     hours: 60,
-
     link: 'https://github.com/AidanAcartis/FarmingResources'
   },
+
   // ── 4. Applications ───────────────────────────────────────────────────────
   {
     id: 8,
@@ -186,7 +160,7 @@ const allProjects = [
     filters: ['software', 'web'],
     demo: 'assets/gifs/Social_media_app.webm',
     short: 'Full-stack social media platform featuring authentication, user profiles, posts, messaging, and real-time interactions.',
-    details: 'Full-stack social media application built with Next.js (frontend) and Node.js/Express (backend). Implements secure user authentication and account creation, along with dynamic profile management (bio, avatar, activity). Core social features include post creation, threaded comments, reactions (likes), and a discussion forum system. Supports private messaging between users and a friend request system (send स्वीकार/decline, mutual connections). Backend exposes REST APIs handling all CRUD operations and relational interactions between users, posts, and messages. Designed with scalability in mind, structuring data flows to support high user interaction density and real-time updates. Focus on clean API architecture, modular components, and efficient state management on the frontend.',
+    details: 'Full-stack social media application built with Next.js (frontend) and Node.js/Express (backend). Implements secure user authentication, dynamic profile management, post creation, threaded comments, reactions, and a discussion forum. Supports private messaging and a friend request system. Backend exposes REST APIs for all CRUD operations.',
     techs: ['Next.js', 'Node.js', 'Express', 'REST API', 'JavaScript'],
     hours: 600,
     link: 'https://github.com/AidanAcartis/Social_Media'
@@ -197,12 +171,12 @@ const allProjects = [
     theme: 'Mobile App',
     category: 'apps',
     filters: ['mobile', 'software'],
-    demo: 'assets/gifs/video.webm',
+    demo: 'assets/gifs/store-app.webm',
     short: 'Cross-platform mobile app for product CRUD with auth, image upload, advanced filters, and user profile management.',
-    details: 'Built with React Native and Expo, backed by json-server simulating a REST API (/users, /products, /categories). Features: Sign Up / Sign In with AsyncStorage session persistence, paginated product list, full CRUD (add, edit, delete with multi-select), image upload via expo-image-picker with preview, and advanced filtering by category buttons, seller name, maximum price, and text search. User profile page shows personal info and a count of products created. Navigation via expo-router with tab layout. Axios handles all API calls. Product sharing button stubbed for future implementation.',
+    details: 'Built with React Native and Expo, backed by json-server simulating a REST API. Features: Sign Up / Sign In with AsyncStorage session persistence, paginated product list, full CRUD with multi-select, image upload via expo-image-picker, and advanced filtering by category, seller name, price, and text search.',
     techs: ['React Native', 'Expo', 'Axios', 'AsyncStorage', 'json-server', 'expo-router'],
     hours: 70,
-    link: 'https://github.com/AidanAcartis'
+    link: 'https://github.com/AidanAcartis/product-manager'
   },
   {
     id: 17,
@@ -210,43 +184,28 @@ const allProjects = [
     theme: 'Cybersecurity · Network & Web Scanning',
     category: 'security',
     filters: ['security', 'software'],
-
     demo: 'assets/gifs/mtscan.webm',
-
     short: 'Full-stack security scanning platform that orchestrates Nmap and Gobuster with real-time results, API access, and interactive analysis dashboard.',
-
-    details: 'MTScan is a full-stack cybersecurity platform designed to automate network and web reconnaissance workflows. Built as a team project, it integrates Nmap for network scanning and Gobuster for web enumeration into a unified system with a modular backend and real-time frontend. The backend exposes a REST API (Flask) with Swagger/OpenAPI documentation, while the frontend provides a terminal-like interface with live logs via WebSockets. The system supports multiple scan profiles, custom port configurations, automatic Gobuster triggering on HTTP detection, and structured result aggregation. Outputs are enriched with risk-based recommendations, visualized through interactive charts, and stored for historical analysis and JSON export. The architecture follows a clean separation of concerns (services, routes, models) and is designed for extensibility and integration.',
-
-    techs: [
-      'Python',
-      'Flask',
-      'REST API',
-      'WebSockets',
-      'Nmap',
-      'Gobuster',
-      'JavaScript',
-      'HTML/CSS',
-      'Chart.js',
-      'Swagger/OpenAPI'
-    ],
-
-    hours: 120, // ajuste si besoin
-
+    details: 'MTScan integrates Nmap for network scanning and Gobuster for web enumeration into a unified system. The backend exposes a REST API (Flask) with Swagger/OpenAPI documentation, while the frontend provides a terminal-like interface with live logs via WebSockets. Outputs are enriched with risk-based recommendations, visualized through interactive charts, and stored for historical analysis and JSON export.',
+    techs: ['Python', 'Flask', 'REST API', 'WebSockets', 'Nmap', 'Gobuster', 'JavaScript', 'HTML/CSS', 'Chart.js', 'Swagger/OpenAPI'],
+    hours: 120,
     link: 'https://github.com/sahyan19/MTScan'
   }
 ];
 
 // ── Category config ────────────────────────────────────────────────────────
 const CATEGORIES = [
-  { id: 'featured', label: 'Featured', icon: '★' },
-  { id: 'ai', label: 'AI & Data', icon: '◈' },
-  { id: 'algorithm', label: 'Systems & Algorithms', icon: '◎' },
-  { id: 'apps', label: 'Applications', icon: '◻' },
-  {id: 'security', label: 'Security', icon: '🛡️'}
+  { id: 'featured',  label: 'Featured',             icon: '★'  },
+  { id: 'ai',        label: 'AI & Data',             icon: '◈'  },
+  { id: 'algorithm', label: 'Systems & Algorithms',  icon: '◎'  },
+  { id: 'apps',      label: 'Applications',          icon: '◻'  },
+  { id: 'security',  label: 'Security',              icon: '🛡️' }
 ];
 
-// Tech filter tags (keep in sync with HTML data-filter buttons)
 let activeFilters = new Set();
+
+// WeakMap to track zoom level per <img> element
+const zoomLevels = new WeakMap();
 
 // ── Init ───────────────────────────────────────────────────────────────────
 function initProjects() {
@@ -263,11 +222,8 @@ function initProjects() {
 // ── Filters ────────────────────────────────────────────────────────────────
 function setupFilters() {
   const existingBtns = document.querySelectorAll('#filterBar .filter-btn');
-
   existingBtns.forEach(btn => {
-    if (btn.classList.contains('active')) {
-      activeFilters.add(btn.dataset.filter);
-    }
+    if (btn.classList.contains('active')) activeFilters.add(btn.dataset.filter);
     btn.addEventListener('click', () => {
       activeFilters.clear();
       document.querySelectorAll('#filterBar .filter-btn').forEach(b => b.classList.remove('active'));
@@ -276,29 +232,25 @@ function setupFilters() {
       renderProjects();
     });
   });
-
 }
-
 
 // ── Render ─────────────────────────────────────────────────────────────────
 function renderProjects() {
   const grid = document.getElementById('projectsGrid');
 
   const filtered = activeFilters.size === 0
-  ? allProjects
-  : allProjects.filter(p => activeFilters.has(p.category));
+    ? allProjects
+    : allProjects.filter(p => activeFilters.has(p.category));
 
   if (filtered.length === 0) {
     grid.innerHTML = '<div class="empty-state">// No projects match this filter.</div>';
     return;
   }
 
-  // Group by category in order
   let html = '';
   CATEGORIES.forEach(cat => {
     const catProjects = filtered.filter(p => p.category === cat.id);
     if (catProjects.length === 0) return;
-
     html += `
       <div class="category-section">
         <div class="category-header">
@@ -314,138 +266,130 @@ function renderProjects() {
 
   grid.innerHTML = html;
 
-  // Stagger animation
   grid.querySelectorAll('.project-card').forEach((card, i) => {
     card.style.animationDelay = `${i * 60}ms`;
     card.classList.add('card-enter');
   });
 }
 
+// ── Card builder ───────────────────────────────────────────────────────────
 function buildCard(p) {
-  const techsHtml = p.techs
-    .map(t => `<span class="tech-tag">${t}</span>`)
-    .join('');
-
-  const featuredBadge = p.category === 'featured'
-    ? '<span class="featured-badge">Featured</span>'
-    : '';
-
-  const isVideo = p.demo?.endsWith('.webm');
+  const techsHtml = p.techs.map(t => `<span class="tech-tag">${t}</span>`).join('');
+  const isVideo   = p.demo?.endsWith('.webm');
 
   const demoHtml = isVideo
-    ? `
-      <video class="video-main" autoplay loop muted playsinline>
-        <source src="${p.demo}" type="video/webm">
-      </video>
-      <div class="demo-scanline"></div>
-    `
-    : `
-      <div class="img-controls">
-        <button class="btn-zoom-toggle" onclick="toggleExpand(this)">SHOW [+]</button>
-      </div>
-      <img class="demo-gif" 
-          src="${p.demo}" 
-          alt="${p.title} demo" 
-          onclick="handleImageClick(this)">
-      <div class="demo-scanline"></div>
-    `;
+    ? `<video class="video-main" autoplay loop muted playsinline>
+         <source src="${p.demo}" type="video/webm">
+       </video>`
+    : `<div class="img-controls">
+         <button class="btn-zoom-toggle" onclick="toggleExpand(this)">SHOW [+]</button>
+         <button class="btn-zoom-in"  onclick="zoomIn(this)"  style="display:none" title="Zoom +">+</button>
+         <button class="btn-zoom-out" onclick="zoomOut(this)" style="display:none" title="Zoom −">−</button>
+       </div>
+       <img class="demo-gif" src="${p.demo}" alt="${p.title} demo">`;
 
   return `
     <div class="project-card">
-      <div class="project-demo">
-        ${demoHtml}
-      </div>
-
+      <div class="project-demo">${demoHtml}</div>
       <div class="project-info">
         <div class="project-title">${p.title}</div>
         <div class="project-theme">${p.theme}</div>
         <div class="project-desc">${p.short}</div>
-
         <div class="project-meta">
-          <div class="meta-item"><span>⏱</span> ${p.hours}h dev</div>
+          <!-- <div class="meta-item"><span>⏱</span> ${p.hours}h dev</div> -->
           <div class="tech-tags">${techsHtml}</div>
         </div>
-
         <div class="project-actions">
           <a href="${p.link}" target="_blank" class="btn-sm btn-outline"
              onclick="event.stopPropagation()">GitHub ↗</a>
-
           <button class="btn-sm btn-primary"
-             onclick="event.stopPropagation(); openModal(${p.id})">
-            Details
-          </button>
+             onclick="event.stopPropagation(); openModal(${p.id})">Details</button>
         </div>
       </div>
-    </div>
-  `;
+    </div>`;
 }
 
-// Fonctions pour gérer le zoom
-function toggleZoom(btn) {
-    const container = btn.closest('.project-demo');
-    container.classList.toggle('expanded');
+// ── Zoom helpers ───────────────────────────────────────────────────────────
+function getZoom(img) {
+  return zoomLevels.get(img) ?? 1;
 }
 
-// Remplace tes anciennes fonctions de zoom par celles-ci :
+function applyZoom(img, level) {
+  const clamped = Math.max(1, Math.min(level, 5));
+  zoomLevels.set(img, clamped);
 
-function handleImageClick(img) {
-  const container = img.closest('.project-demo');
-  if (container.classList.contains('expanded')) {
-    const isZooming = img.classList.toggle('zoomed-in');
-    
-    if (isZooming) {
-      // On ajoute l'écouteur de mouvement uniquement quand on zoom
-      img.onmousemove = (e) => {
-        const { left, top, width, height } = img.getBoundingClientRect();
-        // Calcul du pourcentage de la position de la souris dans l'image
-        const x = ((e.pageX - left - window.scrollX) / width) * 100;
-        const y = ((e.pageY - top - window.scrollY) / height) * 100;
-        
-        // On déplace l'origine du zoom vers la souris
-        img.style.transformOrigin = `${x}% ${y}%`;
-      };
-    } else {
-      // On nettoie quand on dé-zoom
-      img.onmousemove = null;
-      img.style.transformOrigin = 'center center';
-    }
+  // Update transform-origin BEFORE applying scale to avoid position jump
+  if (clamped > 1) {
+    img.style.transform = `scale(${clamped})`;
+    img.style.cursor    = 'crosshair';
+  } else {
+    img.style.transform       = '';
+    img.style.transformOrigin = 'center center';
+    img.style.cursor          = 'default';
   }
+
+  // Enable / disable buttons
+  const container = img.closest('.project-demo');
+  const btnIn  = container.querySelector('.btn-zoom-in');
+  const btnOut = container.querySelector('.btn-zoom-out');
+  if (btnIn)  btnIn.disabled  = clamped >= 5;
+  if (btnOut) btnOut.disabled = clamped <= 1;
 }
 
-// Mise à jour de toggleExpand pour nettoyer le style si on ferme
+function zoomIn(btn) {
+  const img = btn.closest('.project-demo').querySelector('.demo-gif');
+  if (img) applyZoom(img, getZoom(img) + 0.5);
+}
+
+function zoomOut(btn) {
+  const img = btn.closest('.project-demo').querySelector('.demo-gif');
+  if (img) applyZoom(img, getZoom(img) - 0.5);
+}
+
+// ── Expand / collapse image panel ─────────────────────────────────────────
 function toggleExpand(btn) {
   const container = btn.closest('.project-demo');
   const isExpanded = container.classList.toggle('expanded');
-  
+  const img = container.querySelector('.demo-gif');
+
   btn.textContent = isExpanded ? 'CLOSE [-]' : 'SHOW [+]';
-  
-  if (!isExpanded) {
-    const img = container.querySelector('.demo-gif');
-    if (img) {
-      img.classList.remove('zoomed-in');
-      img.onmousemove = null;
-      img.style.transformOrigin = 'center center';
-    }
-  }
+
+  const btnIn  = container.querySelector('.btn-zoom-in');
+  const btnOut = container.querySelector('.btn-zoom-out');
+  if (btnIn)  btnIn.style.display  = isExpanded ? 'inline-block' : 'none';
+  if (btnOut) btnOut.style.display = isExpanded ? 'inline-block' : 'none';
+
+  // Reset zoom on close
+  if (!isExpanded && img) applyZoom(img, 1);
 }
+
+// ── Mouse pan when zoomed ──────────────────────────────────────────────────
+document.addEventListener('mousemove', e => {
+  const img = e.target.closest?.('.demo-gif');
+  if (!img || getZoom(img) <= 1) return;
+
+  const { left, top, width, height } = img.getBoundingClientRect();
+  const x = ((e.clientX - left) / width)  * 100;
+  const y = ((e.clientY - top)  / height) * 100;
+  img.style.transformOrigin = `${x}% ${y}%`;
+});
 
 // ── Modal ──────────────────────────────────────────────────────────────────
 function openModal(id) {
   const p = allProjects.find(x => x.id === id);
   if (!p) return;
 
-  document.getElementById('modalTitle').textContent = p.title;
-  document.getElementById('modalTheme').textContent = p.theme;
-  document.getElementById('modalDesc').textContent = p.details;
-  document.getElementById('modalTechs').innerHTML = p.techs
-    .map(t => `<span class="tech-tag">${t}</span>`).join('');
-  document.getElementById('modalHours').textContent = `${p.hours} hours of development`;
-  document.getElementById('modalLink').href = p.link;
+  document.getElementById('modalTitle').textContent  = p.title;
+  document.getElementById('modalTheme').textContent  = p.theme;
+  document.getElementById('modalDesc').textContent   = p.details;
+  document.getElementById('modalTechs').innerHTML    = p.techs.map(t => `<span class="tech-tag">${t}</span>`).join('');
+  document.getElementById('modalHours').textContent  = `${p.hours} hours of development`;
+  document.getElementById('modalLink').href          = p.link;
 
   document.getElementById('modalOverlay').classList.add('open');
 }
 
-// ── Modal close handlers ───────────────────────────────────────────────────
+// ── Bootstrap ──────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   const closeBtn = document.getElementById('modalClose');
   const overlay  = document.getElementById('modalOverlay');
@@ -461,51 +405,35 @@ document.addEventListener('DOMContentLoaded', () => {
   initFairy();
 });
 
-// ── FAIRY ──────────────────────────────────────────────────────────────────
+// ── Fairy ──────────────────────────────────────────────────────────────────
 function initFairy() {
   const fairy = document.getElementById('fairy');
   if (!fairy) return;
 
-  let fx = window.innerWidth / 2;
+  let fx = window.innerWidth  / 2;
   let fy = window.innerHeight / 2;
   let tx = fx, ty = fy;
 
-  document.addEventListener('mousemove', e => {
-    tx = e.clientX;
-    ty = e.clientY;
-  });
+  document.addEventListener('mousemove', e => { tx = e.clientX; ty = e.clientY; });
 
   function spawnTrail(x, y) {
     const t = document.createElement('div');
     t.className = 'fairy-trail';
     const s = Math.random() * 5 + 3;
-    t.style.cssText = `
-      width:${s}px;
-      height:${s}px;
-      left:${x - s/2}px;
-      top:${y - s/2}px;
-    `;
+    t.style.cssText = `width:${s}px;height:${s}px;left:${x - s/2}px;top:${y - s/2}px;`;
     document.body.appendChild(t);
     setTimeout(() => t.remove(), 800);
   }
 
   let lastTrail = 0;
-
   function animFairy() {
     fx += (tx - fx) * 0.08;
     fy += (ty - fy) * 0.08;
-
     fairy.style.left = (fx - 14) + 'px';
     fairy.style.top  = (fy - 14) + 'px';
-
     const now = Date.now();
-    if (now - lastTrail > 80) {
-      spawnTrail(fx, fy);
-      lastTrail = now;
-    }
-
+    if (now - lastTrail > 80) { spawnTrail(fx, fy); lastTrail = now; }
     requestAnimationFrame(animFairy);
   }
-
   animFairy();
 }
