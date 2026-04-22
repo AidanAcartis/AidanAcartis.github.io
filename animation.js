@@ -56,3 +56,27 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(type, 1000);
   }
 });
+
+// ===== NAV BURGER =====
+function toggleNav() {
+  const links = document.getElementById('navLinks');
+  const burger = document.getElementById('navBurger');
+  links.classList.toggle('open');
+  burger.classList.toggle('open');
+}
+
+function closeNav() {
+  const links = document.getElementById('navLinks');
+  const burger = document.getElementById('navBurger');
+  links.classList.remove('open');
+  burger.classList.remove('open');
+}
+
+// Fermer si clic en dehors du nav
+document.addEventListener('click', e => {
+  const nav = document.querySelector('nav');
+  const links = document.getElementById('navLinks');
+  if (links?.classList.contains('open') && !nav.contains(e.target)) {
+    closeNav();
+  }
+});

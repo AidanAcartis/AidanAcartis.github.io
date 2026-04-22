@@ -11,12 +11,15 @@
 <!-- NAV -->
 <nav>
   <div class="nav-logo">&lt;AidanAcartis /&gt;</div>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#awards">Awards</a></li>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about" onclick="closeNav()">About</a></li>
+    <li><a href="#projects" onclick="closeNav()">Projects</a></li>
+    <li><a href="#skills" onclick="closeNav()">Skills</a></li>
+    <li><a href="#awards" onclick="closeNav()">Awards</a></li>
   </ul>
+  <button class="nav-burger" id="navBurger" aria-label="Menu" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <!-- ABOUT -->
@@ -76,32 +79,32 @@
  
   <div class="filter-bar" id="filterBar">
 
-  <button class="filter-btn active" data-filter="featured">
+  <button class="filter-btn active" data-filter="featured" data-label="Featured">
     <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-    Featured
+    <span class="filter-label">Featured</span>
   </button>
 
-  <button class="filter-btn" data-filter="ai">
+  <button class="filter-btn" data-filter="ai" data-label="AI &amp; Data">
     <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
-    AI &amp; Data
+    <span class="filter-label">AI &amp; Data</span>
   </button>
 
-  <button class="filter-btn" data-filter="algorithm">
+  <button class="filter-btn" data-filter="algorithm" data-label="Algorithms">
     <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-    Algorithms
+    <span class="filter-label">Algorithms</span>
   </button>
 
-  <button class="filter-btn" data-filter="apps">
+  <button class="filter-btn" data-filter="apps" data-label="Applications">
     <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="18" r="1"/></svg>
-    Applications
+    <span class="filter-label">Applications</span>
   </button>
 
-  <button class="filter-btn" data-filter="security">
+  <button class="filter-btn" data-filter="security" data-label="Security">
     <svg viewBox="0 0 24 24">
       <path d="M12 2l8 4v6c0 5-3.8 9.7-8 10-4.2-.3-8-5-8-10V6l8-4z"/>
       <path d="M9 12l2 2 4-4"/>
     </svg>
-    Network Security
+    <span class="filter-label">Security</span>
   </button>
 
 </div>
@@ -134,7 +137,7 @@
 
 <!-- FOOTER -->
 <footer>
-  Built with <span>♥</span> &amp; <span>&lt;code/&gt;</span> — <span>RALAIKOTO Sitraka</span> © 2025
+  Built with <span>♥</span> &amp; <span>&lt;code/&gt;</span> — <span>RALAIKOTO Sitraka</span> © 2026
 </footer>
 
 <!-- MODAL -->
