@@ -3,6 +3,7 @@
 const words = [
   "Software Engineer",
   "Machine Learning Engineer",
+  "Data Science",
   "Web Developer",
   "Deep Learning & NLP",
   "Computer Vision",
