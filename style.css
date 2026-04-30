@@ -666,16 +666,22 @@
 
   /* --- ABOUT --- */
   .about-inner {
-    flex-direction: column-reverse;
+    display: flex;
+    flex-direction: column;
     align-items: flex-start;
     gap: 2rem;
   }
   .about-left {
     width: 100%;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
+    order: 1;   /* ← 1 = premier */
     align-items: center;
     gap: 1.2rem;
+  }
+
+  .about-right {
+    order: 2;   /* ← 2 = second */
   }
   .about-desc { max-width: 100%; text-align: left; }
   .about-links { flex-wrap: wrap; }
@@ -1007,7 +1013,12 @@
   footer span { color: var(--green); }
 
   @media (max-width: 600px) {
-    .about-inner { flex-direction: column-reverse; align-items: flex-start; }
+    .about-inner { flex-direction: column; align-items: flex-start; }
+    .about-left {
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
     .about-right { flex-direction: row; }
     section { padding: 80px 4vw 40px; }
   }

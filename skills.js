@@ -32,6 +32,20 @@ const CERTIFICATIONS = [
     link: "https://www.freecodecamp.org/certification/fcc-a2c51ce3-6961-4459-bc86-5b59e442d6c7/machine-learning-with-python-v7"
   },
   {
+    name: "Software Engineer",
+    issuer: "Hackerrank",
+    year: "2025",
+    image: "assets/certs/SE.png",
+    link: "https://www.hackerrank.com/certificates/0ac216a0d969"
+  },
+  {
+    name: "Hackathon Winner - Hack4her",
+    issuer: "#HelloWomen Orange Madagascar",
+    year: "2024",
+    image: "assets/certs/CERT_HACKATHON.png",
+    link: "https://AidanAcartis.github.io/assets/certs/CERT_HACKATHON.png"
+  },
+  {
     name: "Intermediate Machine Learning with Kaggle",
     issuer: "Kaggle",
     year: "2025",
@@ -58,13 +72,6 @@ const CERTIFICATIONS = [
     year: "2025",
     image: "assets/certs/python.png",
     link: "https://www.hackerrank.com/certificates/489cbde3d500?test_finished=true"
-  },
-  {
-    name: "Software Engineer",
-    issuer: "Hackerrank",
-    year: "2025",
-    image: "assets/certs/SE.png",
-    link: "https://www.hackerrank.com/certificates/0ac216a0d969"
   },
   {
     name: "Certified in Cybersecurity",
