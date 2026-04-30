@@ -196,7 +196,7 @@ const allProjects = [
 // ── Category config ────────────────────────────────────────────────────────
 const CATEGORIES = [
   { id: 'featured',  label: 'Featured',             icon: '★'  },
-  { id: 'ai',        label: 'AI & Data',             icon: '◈'  },
+  { id: 'ai',        label: 'ML & DL',             icon: '◈'  },
   { id: 'algorithm', label: 'Systems & Algorithms',  icon: '◎'  },
   { id: 'apps',      label: 'Applications',          icon: '◻'  },
   { id: 'security',  label: 'Security',              icon: '🛡️' }
@@ -383,7 +383,7 @@ function openModal(id) {
   document.getElementById('modalTheme').textContent  = p.theme;
   document.getElementById('modalDesc').textContent   = p.details;
   document.getElementById('modalTechs').innerHTML    = p.techs.map(t => `<span class="tech-tag">${t}</span>`).join('');
-  document.getElementById('modalHours').textContent  = `${p.hours} hours of development`;
+  // document.getElementById('modalHours').textContent  = `${p.hours} hours of development`;
   document.getElementById('modalLink').href          = p.link;
 
   document.getElementById('modalOverlay').classList.add('open');
